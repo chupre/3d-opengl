@@ -1,6 +1,6 @@
 GLuint shaderProgram;
 
-void genShader();
+void setShader();
 char* getShaderContent(const GLchar* fileName);
 
 // Parse shader code in string
@@ -29,7 +29,7 @@ char* getShaderContent(const GLchar* fileName)
 }
 
 // Create shader
-void genShader()
+void setShader()
 {
     const GLchar* vertexShaderSource = getShaderContent("../source/shaders/vertex_shader.glsl");
     const GLchar* fragmentShaderSource = getShaderContent("../source/shaders/fragment_shader.glsl");
