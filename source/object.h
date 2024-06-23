@@ -1,4 +1,4 @@
-#define OBJECT_VERTICES_SIZE sizeof(float) * 3 * 3
+#define OBJECT_VERTICES_SIZE sizeof(float) * 3 * 6
 #define OBJECT_NAME_SIZE 128
 
 // Object struct

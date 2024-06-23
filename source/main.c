@@ -8,10 +8,14 @@
 #include <stb/stb_image.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <cglm/cglm.h>
 
-// Project includes
+// Custom modules
+#include <macros.h>
+#include <render.h>
+#include <shaders/shader.h>
+#include <camera.h>
 #include <window.h>
-#include <shader.h>
 #include <object.h>
 
 int main(int argc, char** argv)
@@ -22,26 +26,38 @@ int main(int argc, char** argv)
     // Generate shader program
     setShader();
 
-    object helloTriangle;
-    
-    GLfloat helloTriangleVertices[] = 
+    // Creating plane
+    object plane;
+    GLfloat planeVertices[] = 
     {
-    -0.5f, -0.5f, 0.0f,
-     0.5f, -0.5f, 0.0f,
-     0.0f,  0.5f, 0.0f
+        -10.0f, -10.0f, 0.0f,
+        10.0f, -10.0f, 0.0f,
+        -10.0f,  10.0f, 0.0f,
+        10.0f, 10.0f, 0.0f,
+        10.0f, -10.0f, 0.0f,
+        -10.0f,  10.0f, 0.0f,
     };
+    newObject(&plane, planeVertices, "plane", STATIC);
 
-    newObject(&helloTriangle, helloTriangleVertices, "HelloTriangle", STATIC);
+    // Activate shader
+    glUseProgram(shaderProgram);
+
+    // Since projection matrix rarely changes there is no need to put in render loop
+    setProjectionUniform();
 
     // Main loop
     while(!glfwWindowShouldClose(window))
     {
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        updateDeltaTime();
+        
+        glClearColor(0.529f, 0.808f, 0.922f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glUseProgram(shaderProgram);
-        glBindVertexArray(helloTriangle.VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        setModelUniform();
+        setViewUniform();
+        
+        glBindVertexArray(plane.VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
