@@ -1,4 +1,5 @@
 #define DEFAULT_FOV 75.0f
+#define INTERPOLATION_STEP 0.05f
 
 // Consts for transformations around x, y, z 
 vec3 X_AXIS = { 1.0f, 0.0f, 0.0f };
@@ -70,21 +71,21 @@ void setProjectionUniform()
 void moveCamera(enum moveDirection dir)
 {
     // Speeds multiplies by deltatime to make it not fps-related
-    float cameraSpeed = 7.5f * deltaTime * cameraSpeedMultiplier;
-    vec3 temp;
+    float cameraSpeed = 125.0f * deltaTime * cameraSpeedMultiplier;
+    vec3 temp, targetPos;
 
     // Move camera forwards
     if (dir == FORWARD)
     {
         glm_vec3_scale(cameraFront, cameraSpeed, temp);
-        glm_vec3_add(cameraPos, temp, cameraPos);
+        glm_vec3_add(cameraPos, temp, targetPos);
     }
 
     // Move camera backwards
     if (dir == BACK)
     {
         glm_vec3_scale(cameraFront, cameraSpeed, temp);
-        glm_vec3_sub(cameraPos, temp, cameraPos);
+        glm_vec3_sub(cameraPos, temp, targetPos);
     }
 
     // Move camera to the right
@@ -93,7 +94,7 @@ void moveCamera(enum moveDirection dir)
         glm_vec3_cross(cameraFront, cameraUp, temp);
         glm_normalize(temp);
         glm_vec3_scale(temp, cameraSpeed, temp);
-        glm_vec3_add(cameraPos, temp, cameraPos);
+        glm_vec3_add(cameraPos, temp, targetPos);
     }
 
     // Move camera to the left
@@ -102,8 +103,11 @@ void moveCamera(enum moveDirection dir)
         glm_vec3_cross(cameraFront, cameraUp, temp);
         glm_normalize(temp);
         glm_vec3_scale(temp, cameraSpeed, temp);
-        glm_vec3_sub(cameraPos, temp, cameraPos);
+        glm_vec3_sub(cameraPos, temp, targetPos);
     }
+
+    // Applying linear interpolation
+    glm_vec3_lerp(cameraPos, targetPos, INTERPOLATION_STEP, cameraPos);
 }
 
 // Updating camera position depending on mouse input
@@ -116,7 +120,5 @@ void applyMouseInput()
     direction[2] = sin(glm_rad(yaw)) * cos(glm_rad(pitch));
 
     // Applying changes to camera position
-    // glm_vec3_norm(direction);
-    // glm_vec3_copy(direction, cameraFront);
     glm_normalize_to(direction, cameraFront);
 }
