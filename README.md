@@ -1,8 +1,7 @@
 # 🗒️ TO-DO:
 🔴 Implement smooth camera movement (linear interpolation and input smoothing).\
 🟢 Add pause.\
-🔴 Rename object module to prop module.\
-🔴 Add pause.\
+🟢 Rename object module to prop module.\
 🔴 Create camera object.\
 🔴 Create player object.\
 🔴 Add player collision.\

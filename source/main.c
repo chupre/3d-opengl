@@ -16,7 +16,7 @@
 #include <shaders/shader.h>
 #include <camera.h>
 #include <window.h>
-#include <object.h>
+#include <prop.h>
 
 int main(int argc, char** argv)
 {
@@ -27,7 +27,7 @@ int main(int argc, char** argv)
     setShader();
 
     // Creating plane
-    object plane;
+    prop plane;
     GLfloat planeVertices[] = 
     {
         -10.0f, -10.0f, 0.0f,
@@ -37,7 +37,7 @@ int main(int argc, char** argv)
         10.0f, -10.0f, 0.0f,
         -10.0f,  10.0f, 0.0f,
     };
-    newObject(&plane, planeVertices, "plane", STATIC);
+    newProp(&plane, planeVertices, "plane", STATIC);
 
     // Activate shader
     glUseProgram(shaderProgram);
