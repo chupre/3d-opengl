@@ -1,20 +1,21 @@
-#define DEFAULT_FOV 60.0f
-#define DEFAULT_CAMERA_SPEED 10.0f
+// Custom modules
+#include <camera.h>
+#include <player.h>
+#include <shader.h>
+#include <window.h>
+#include <update.h>
+
+// Camera offset by mouse input
+GLfloat pitch = 0.0f;
+GLfloat yaw = -90.0f;
 
 // Consts for transformations around x, y, z 
 vec3 X_AXIS = { 1.0f, 0.0f, 0.0f };
 vec3 Y_AXIS = { 0.0f, 1.0f, 0.0f };
 vec3 Z_AXIS = { 0.0f, 0.0f, 1.0f };
 
-// Camera offset by mouse input
-GLfloat pitch = 0.0f;
-GLfloat yaw = -90.0f;
-
-void initCamera();
-void setModelUniform();
-void setViewUniform();
-void setProjectionUniform();
-void applyMouseInput();
+// Camera declaration
+Camera camera;
 
 // Camera initialization
 void initCamera()
@@ -66,7 +67,7 @@ void setProjectionUniform()
     // Creating projection matrix
     mat4 projection;
     glm_mat4_identity(projection);
-    glm_perspective(glm_rad(camera.FOV), (float)screenWidth / (float)screenHeight, 0.1f, 100.0f, projection);
+    glm_perspective(glm_rad(camera.FOV), (float)screenWidth / (float)screenHeight, 0.1f, RENDER_DISTANCE, projection);
 
     // Setting projection uniform
     int projectionLoc = glGetUniformLocation(shaderProgram, "projection");

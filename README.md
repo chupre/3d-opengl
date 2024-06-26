@@ -3,10 +3,14 @@
 🟢 Add pause.\
 🟢 Rename object module to prop module.\
 🟢 Create camera struct.\
-🟢 Create player object.\
+🟢 Create player struct.\
+🟢 Separate headers with .c files.\
+🟢 Reogranised CMakeLists.\
+🔴 Add render and update functions.\
 🔴 Add player collision.\
 🔴 Add jumping on space.\
-🔴 Add render and update functions.\
-🔴 Implement textures (first - skybox).\
 🔴 Add Anti Aliasing.\
+🔴 Implement textures (first - skybox).\
+🔴 Add text rendering.\
+🔴 Add model loader.\
 🔴 Add GUI for settings.

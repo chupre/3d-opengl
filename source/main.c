@@ -4,19 +4,16 @@
 #include <string.h>
 
 // External includes
-#define STB_IMAGE_IMPLEMENTATION
-#include <stb/stb_image.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <cglm/cglm.h>
 
 // Custom modules
-#include <macros.h>
-#include <shaders/shader.h>
+#include <shader.h>
 #include <player.h>
+#include <update.h>
 #include <render.h>
 #include <camera.h>
-#include <keyboardInput.h>
+#include <keyboard_input.h>
 #include <window.h>
 #include <prop.h>
 
@@ -30,14 +27,15 @@ int main(int argc, char** argv)
 
     // Creating plane
     Prop plane;
+    int planeSize = 50.0f;
     GLfloat planeVertices[] = 
     {
-        -10.0f, -10.0f, 0.0f,
-        10.0f, -10.0f, 0.0f,
-        -10.0f,  10.0f, 0.0f,
-        10.0f, 10.0f, 0.0f,
-        10.0f, -10.0f, 0.0f,
-        -10.0f,  10.0f, 0.0f,
+        -planeSize, -planeSize, 0.0f,
+        planeSize, -planeSize, 0.0f,
+        -planeSize,  planeSize, 0.0f,
+        planeSize, planeSize, 0.0f,
+        planeSize, -planeSize, 0.0f,
+        -planeSize,  planeSize, 0.0f,
     };
     newProp(&plane, planeVertices, "plane", STATIC);
 
@@ -54,9 +52,9 @@ int main(int argc, char** argv)
     setProjectionUniform();
 
     // Main loop
-    while(!glfwWindowShouldClose(window))
+    while(isRunning)
     {
-        updateDeltaTime();
+        updateGameTime();
 
         updateCameraPosition();
 

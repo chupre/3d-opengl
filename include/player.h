@@ -1,3 +1,10 @@
+// Standard include
+#include <stdbool.h>
+
+// External include
+#include <glad/glad.h>
+#include <cglm/cglm.h>
+
 // Struct for storing all kinds of temporary states player could be in.
 typedef struct
 {
@@ -13,19 +20,6 @@ typedef struct
     playerState states;
 } Player;
 
-Player player;
+extern Player player;
 
 void initPlayer();
-
-void initPlayer()
-{
-    player.height = 1.0f;
-    
-    // Set in world center
-    player.position[0] = 0.0f;
-    player.position[1] = player.height;
-    player.position[2] = 0.0f; 
-
-    // Set states to default
-    player.states.noclip = true;
-}

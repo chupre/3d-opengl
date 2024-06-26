@@ -1,7 +1,7 @@
-GLuint shaderProgram;
+// Custom modules
+#include <shader.h>
 
-void setShader();
-char* getShaderContent(const GLchar* fileName);
+GLuint shaderProgram;
 
 // Parse shader code in string
 char* getShaderContent(const GLchar* fileName)

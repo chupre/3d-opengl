@@ -1,5 +1,7 @@
-// Max GLFW keycode
-#define NUMBER_OF_KEYS 348 
+// Custom modules
+#include <keyboard_input.h>
+#include <camera.h>
+#include <update.h>
 
 // Keymap for keys.
 // Key code == key index.

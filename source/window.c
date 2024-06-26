@@ -1,12 +1,28 @@
+// Must be defined in .c file
+#define STB_IMAGE_IMPLEMENTATION
+
+// Custom modules
+#include <window.h>
+#include <keyboard_input.h>
+#include <player.h>
+#include <camera.h>
+#include <shader.h>
+#include <render.h>
+
+// Window preinitialization
+GLchar* window_name = "3D-OpenGL";
+GLFWwindow* window;
+
 // Cursor position centered in middle
 GLfloat lastCursorPosX = (float)WINDOW_WIDTH / 2.0f;
 GLfloat lastCursorPosY = (float)WINDOW_HEIGHT / 2.0f;
 
-GLvoid setWindow();
-GLvoid keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
-GLvoid mouseCallback(GLFWwindow* window, double xpos, double ypos);
-GLvoid scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
-GLvoid quit();
+GLint screenWidth = WINDOW_WIDTH;
+GLint screenHeight = WINDOW_HEIGHT;
+
+// This boolean uses when program starts or unpauses to prevent weird mouse movements. 
+// Initially set by true.
+bool firstMouseInput = true;
 
 // GLFW & GLAD initialization and creating a window
 GLvoid setWindow()
@@ -24,7 +40,7 @@ GLvoid setWindow()
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
     glViewport(0, 0, screenWidth, screenHeight);
     glEnable(GL_DEPTH_TEST);
-    
+       
     //Setting icon for window
     GLint iconWidth, iconHeight;
     GLint channels;
@@ -32,8 +48,7 @@ GLvoid setWindow()
     GLFWimage images[1];
     images[0].width = iconWidth;
     images[0].height = iconHeight;
-    images[0].pixels = pixels;
-    glfwSetWindowIcon(window, 1, images);
+    images[0].pixels = pixels; glfwSetWindowIcon(window, 1, images);
 
     // Setting input callbacks
     glfwSetKeyCallback(window, keyCallback);
@@ -69,7 +84,7 @@ GLvoid keyCallback(GLFWwindow* window, int key, int scancode, int action, int mo
         // Exit game
         if (key == GLFW_KEY_F6 && action == GLFW_PRESS)
         {
-            glfwSetWindowShouldClose(window, true);
+            isRunning = false;
         }
 
         // Noclip
@@ -100,7 +115,7 @@ GLvoid mouseCallback(GLFWwindow* window, double xpos, double ypos)
         lastCursorPosY = ypos;
 
         // Appyling sensitivity
-        const float sensitivity = 0.1f;
+        const float sensitivity = 0.07f;
         xoffset *= sensitivity;
         yoffset *= sensitivity;
 
