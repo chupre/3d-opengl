@@ -1,3 +1,5 @@
+#define INTERPOLATION_MULTIPLIER 2.0f
+
 // Window preinitialization
 GLchar* window_name = "3D-OpenGL";
 GLFWwindow* window;
@@ -41,10 +43,35 @@ GLvoid updateCameraPosition();
 GLvoid updateDeltaTime();
 GLvoid togglePause();
 
-// Updates camera position each frame for linear interpolation
+// Camera.h
+void moveCameraTarget(enum direction dir);
+
+// Updates camera position each frame
 GLvoid updateCameraPosition()
 {
-    glm_vec3_lerp(camera.currPos, camera.targetPos, deltaTime * 3.0f, camera.currPos);
+    // Moves camera depends on directions from user input
+    if (cameraMovement[FORWARD])
+    {
+        moveCameraTarget(FORWARD);
+    }
+    if (cameraMovement[BACKWARDS])
+    {
+        moveCameraTarget(BACKWARDS);
+    }
+    if (cameraMovement[LEFT])
+    {
+        moveCameraTarget(LEFT);
+    }
+    if (cameraMovement[RIGHT])
+    {
+        moveCameraTarget(RIGHT);
+    }
+
+    // Applies linear interpolation
+    glm_vec3_lerp(camera.currPos, camera.targetPos, deltaTime * INTERPOLATION_MULTIPLIER, camera.currPos);
+
+    // Reset speedMultiplier to default.
+    camera.speedMultiplier = 1.0f;
 }
 
 

@@ -72,6 +72,7 @@ int main(int argc, char** argv)
 
         glfwSwapBuffers(window);
         glfwPollEvents();
+
     }
 
     // End of program

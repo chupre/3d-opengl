@@ -1,7 +1,5 @@
 #define DEFAULT_FOV 60.0f
-#define DEFAULT_CAMERA_SPEED_MULTIPLIER 2.0f
-#define DEFAULT_CAMERA_SPEED 40.0f
-#define INTERPOLATION_STEP 0.05f
+#define DEFAULT_CAMERA_SPEED 20.0f
 
 // Consts for transformations around x, y, z 
 vec3 X_AXIS = { 1.0f, 0.0f, 0.0f };
@@ -16,7 +14,6 @@ void initCamera();
 void setModelUniform();
 void setViewUniform();
 void setProjectionUniform();
-void moveCameraTarget(enum moveDirection dir);
 void applyMouseInput();
 
 // Camera initialization
@@ -76,7 +73,7 @@ void setProjectionUniform()
 }
 
 // Updates camera target position
-void moveCameraTarget(enum moveDirection dir)
+void moveCameraTarget(enum direction dir)
 {
     // Speeds multiplies by deltatime to make it not fps-related
     float cameraSpeed = DEFAULT_CAMERA_SPEED * deltaTime * camera.speedMultiplier;
@@ -86,14 +83,14 @@ void moveCameraTarget(enum moveDirection dir)
     if (dir == FORWARD)
     {
         glm_vec3_scale(camera.front, cameraSpeed, temp);
-        glm_vec3_add(camera.currPos, temp, camera.targetPos);
+        glm_vec3_add(camera.targetPos, temp, camera.targetPos);
     }
 
     // Move camera backwards
     if (dir == BACKWARDS)
     {
         glm_vec3_scale(camera.front, cameraSpeed, temp);
-        glm_vec3_sub(camera.currPos, temp, camera.targetPos);
+        glm_vec3_sub(camera.targetPos, temp, camera.targetPos);
     }
 
     // Move camera to the right
@@ -102,7 +99,7 @@ void moveCameraTarget(enum moveDirection dir)
         glm_vec3_cross(camera.front, camera.up, temp);
         glm_normalize(temp);
         glm_vec3_scale(temp, cameraSpeed, temp);
-        glm_vec3_add(camera.currPos, temp, camera.targetPos);
+        glm_vec3_add(camera.targetPos, temp, camera.targetPos);
     }
 
     // Move camera to the left
@@ -111,14 +108,11 @@ void moveCameraTarget(enum moveDirection dir)
         glm_vec3_cross(camera.front, camera.up, temp);
         glm_normalize(temp);
         glm_vec3_scale(temp, cameraSpeed, temp);
-        glm_vec3_sub(camera.currPos, temp, camera.targetPos);
+        glm_vec3_sub(camera.targetPos, temp, camera.targetPos);
     }
 
     // No flying
-    //targetPos[1] = 1.0f; 
-
-    updateCameraPosition();
-    camera.speedMultiplier = 1.0f;
+    //camera.targetPos[1] = 1.0f; 
 }
 
 // Updating camera position depending on mouse input
