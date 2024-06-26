@@ -1,4 +1,4 @@
-#define DEFAULT_FOV 75.0f
+#define DEFAULT_FOV 60.0f
 #define INTERPOLATION_STEP 0.05f
 
 // Consts for transformations around x, y, z 
@@ -71,7 +71,7 @@ void setProjectionUniform()
 void moveCamera(enum moveDirection dir)
 {
     // Speeds multiplies by deltatime to make it not fps-related
-    float cameraSpeed = 125.0f * deltaTime * cameraSpeedMultiplier;
+    float cameraSpeed = 10.0f * deltaTime * cameraSpeedMultiplier;
     vec3 temp, targetPos;
 
     // Move camera forwards
@@ -106,8 +106,7 @@ void moveCamera(enum moveDirection dir)
         glm_vec3_sub(cameraPos, temp, targetPos);
     }
 
-    // Applying linear interpolation
-    glm_vec3_lerp(cameraPos, targetPos, INTERPOLATION_STEP, cameraPos);
+    glm_vec3_copy(targetPos, cameraPos);
 }
 
 // Updating camera position depending on mouse input

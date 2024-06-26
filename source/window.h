@@ -12,7 +12,7 @@ bool firstMouseInput = true;
 GLvoid setWindow();
 GLvoid keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 GLvoid mouseCallback(GLFWwindow* window, double xpos, double ypos);
-void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
+GLvoid scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 
 // GLFW & GLAD initialization and creating a window
 GLvoid setWindow()
@@ -59,6 +59,24 @@ GLvoid keyCallback(GLFWwindow* window, int key, int scancode, int action, int mo
         glfwSetWindowShouldClose(window, true);
     }
 
+    // Pause
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    {
+        // Unpauses and returns cursor in the middle
+        if (isPaused)
+        {
+            isPaused = false;
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        }
+        // Pauses and makes cursor visible and not attached to the middle of screen
+        else
+        {
+            firstMouseInput = true; // Prevents camera following new cursor position after pause
+            isPaused = true;
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        }
+    }
+
     // Movement
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
     {
@@ -94,6 +112,8 @@ GLvoid keyCallback(GLFWwindow* window, int key, int scancode, int action, int mo
 // Callback for processing mouse input
 GLvoid mouseCallback(GLFWwindow* window, double xpos, double ypos)
 {
+    if (!isPaused)
+    {
     // Checks if the mouse input is the first one to prevent weird camera movements
     if (firstMouseInput)
     {
@@ -131,10 +151,11 @@ GLvoid mouseCallback(GLFWwindow* window, double xpos, double ypos)
 
     // Applying offsets to camera position
     applyMouseInput();
+    }
 }
 
 // Callback for scroll. Scrolling zooms camera in and out
-void scrollCallback(GLFWwindow* window, double xoffset, double yoffset)
+GLvoid scrollCallback(GLFWwindow* window, double xoffset, double yoffset)
 {
     fov -= (float)yoffset * cameraSpeedMultiplier;
 

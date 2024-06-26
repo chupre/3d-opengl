@@ -49,15 +49,18 @@ int main(int argc, char** argv)
     while(!glfwWindowShouldClose(window))
     {
         updateDeltaTime();
-        
-        glClearColor(0.529f, 0.808f, 0.922f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        setModelUniform();
-        setViewUniform();
-        
-        glBindVertexArray(plane.VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+        if (!isPaused)
+        {
+            glClearColor(0.529f, 0.808f, 0.922f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            setModelUniform();
+            setViewUniform();
+            
+            glBindVertexArray(plane.VAO);
+            glDrawArrays(GL_TRIANGLES, 0, 6);
+        }
 
         glfwSwapBuffers(window);
         glfwPollEvents();
