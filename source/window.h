@@ -71,6 +71,12 @@ GLvoid keyCallback(GLFWwindow* window, int key, int scancode, int action, int mo
         {
             glfwSetWindowShouldClose(window, true);
         }
+
+        // Noclip
+        if (key == GLFW_KEY_N && action == GLFW_PRESS)
+        {
+            player.states.noclip = !player.states.noclip;
+        }
 }
 
 // Callback for processing mouse input

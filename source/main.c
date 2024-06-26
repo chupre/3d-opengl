@@ -13,6 +13,7 @@
 // Custom modules
 #include <macros.h>
 #include <shaders/shader.h>
+#include <player.h>
 #include <render.h>
 #include <camera.h>
 #include <keyboardInput.h>
@@ -40,7 +41,10 @@ int main(int argc, char** argv)
     };
     newProp(&plane, planeVertices, "plane", STATIC);
 
-    // Setting up camera
+    // Player initialization
+    initPlayer();
+
+    // Camera initialization
     initCamera();
 
     // Activate shader

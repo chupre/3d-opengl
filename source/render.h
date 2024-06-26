@@ -70,6 +70,9 @@ GLvoid updateCameraPosition()
     // Applies linear interpolation
     glm_vec3_lerp(camera.currPos, camera.targetPos, deltaTime * INTERPOLATION_MULTIPLIER, camera.currPos);
 
+    // Copy camera pos to player pos
+    glm_vec3_copy(camera.currPos, player.position);
+
     // Reset speedMultiplier to default.
     camera.speedMultiplier = 1.0f;
 }

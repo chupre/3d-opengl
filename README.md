@@ -3,7 +3,7 @@
 🟢 Add pause.\
 🟢 Rename object module to prop module.\
 🟢 Create camera struct.\
-🔴 Create player object.\
+🟢 Create player object.\
 🔴 Add player collision.\
 🔴 Add jumping on space.\
 🔴 Add render and update functions.\

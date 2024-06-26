@@ -1,5 +1,5 @@
 #define DEFAULT_FOV 60.0f
-#define DEFAULT_CAMERA_SPEED 20.0f
+#define DEFAULT_CAMERA_SPEED 10.0f
 
 // Consts for transformations around x, y, z 
 vec3 X_AXIS = { 1.0f, 0.0f, 0.0f };
@@ -23,11 +23,12 @@ void initCamera()
     camera.speedMultiplier = 1.0f;
 
     // Setting camera vectors
-    vec3 pos = { 0.0f, 1.0f, 3.0f };
     vec3 front = { 0.0f, 0.0f, -1.0f };
     vec3 up = { 0.0f, 1.0f, 0.0f };
-    glm_vec3_copy(pos, camera.currPos);
-    glm_vec3_copy(pos, camera.targetPos);
+
+    // Camera pos is equal to player pos
+    glm_vec3_copy(player.position, camera.currPos);
+    glm_vec3_copy(player.position, camera.targetPos);
     glm_vec3_copy(front, camera.front);
     glm_vec3_copy(up, camera.up);
 }
@@ -111,8 +112,11 @@ void moveCameraTarget(enum direction dir)
         glm_vec3_sub(camera.targetPos, temp, camera.targetPos);
     }
 
-    // No flying
-    //camera.targetPos[1] = 1.0f; 
+    // Noclip
+    if (!player.states.noclip)
+    {
+        camera.targetPos[1] = 1.0f; 
+    }
 }
 
 // Updating camera position depending on mouse input
