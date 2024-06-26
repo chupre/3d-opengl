@@ -12,9 +12,10 @@
 
 // Custom modules
 #include <macros.h>
-#include <render.h>
 #include <shaders/shader.h>
+#include <render.h>
 #include <camera.h>
+#include <keyboardInput.h>
 #include <window.h>
 #include <prop.h>
 
@@ -27,7 +28,7 @@ int main(int argc, char** argv)
     setShader();
 
     // Creating plane
-    prop plane;
+    Prop plane;
     GLfloat planeVertices[] = 
     {
         -10.0f, -10.0f, 0.0f,
@@ -39,6 +40,9 @@ int main(int argc, char** argv)
     };
     newProp(&plane, planeVertices, "plane", STATIC);
 
+    // Setting up camera
+    initCamera();
+
     // Activate shader
     glUseProgram(shaderProgram);
 
@@ -49,6 +53,10 @@ int main(int argc, char** argv)
     while(!glfwWindowShouldClose(window))
     {
         updateDeltaTime();
+
+        updateCameraPosition();
+
+        processKeyboardInput();
 
         if (!isPaused)
         {
@@ -67,7 +75,5 @@ int main(int argc, char** argv)
     }
 
     // End of program
-    glDeleteProgram(shaderProgram);
-    glfwTerminate();
-    return EXIT_SUCCESS;
+    quit();
 }

@@ -1,8 +1,6 @@
 // Movement directions
-enum moveDirection { FORWARD, BACK, RIGHT, LEFT };
+enum moveDirection { FORWARD, BACKWARDS, RIGHT, LEFT };
 
-// Initializing window size
-#define WINDOW_WIDTH 1280
-#define WINDOW_HEIGHT 960
-GLint screenWidth = WINDOW_WIDTH;
-GLint screenHeight = WINDOW_HEIGHT;
+// This boolean uses when program starts or unpauses to prevent weird mouse movements. 
+// Initially set by true.
+bool firstMouseInput = true;

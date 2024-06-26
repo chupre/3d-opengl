@@ -1,4 +1,6 @@
 #define DEFAULT_FOV 60.0f
+#define DEFAULT_CAMERA_SPEED_MULTIPLIER 2.0f
+#define DEFAULT_CAMERA_SPEED 40.0f
 #define INTERPOLATION_STEP 0.05f
 
 // Consts for transformations around x, y, z 
@@ -10,22 +12,28 @@ vec3 Z_AXIS = { 0.0f, 0.0f, 1.0f };
 GLfloat pitch = 0.0f;
 GLfloat yaw = -90.0f;
 
-// Camera FOV
-GLfloat fov = DEFAULT_FOV;
-
-// Vectors for constructing view matrix
-vec3 cameraPos = { 0.0f, 1.0f, 3.0f };
-vec3 cameraFront = { 0.0f, 0.0f, -1.0f };
-vec3 cameraUp = { 0.0f, 1.0f, 0.0f };
-
-// Camera speed multiplier, initially set to 1.0, increases when shift is pressed
-GLfloat cameraSpeedMultiplier = 1.0f;
-
+void initCamera();
 void setModelUniform();
 void setViewUniform();
 void setProjectionUniform();
-void moveCamera(enum moveDirection dir);
+void moveCameraTarget(enum moveDirection dir);
 void applyMouseInput();
+
+// Camera initialization
+void initCamera()
+{
+    camera.FOV = DEFAULT_FOV;
+    camera.speedMultiplier = 1.0f;
+
+    // Setting camera vectors
+    vec3 pos = { 0.0f, 1.0f, 3.0f };
+    vec3 front = { 0.0f, 0.0f, -1.0f };
+    vec3 up = { 0.0f, 1.0f, 0.0f };
+    glm_vec3_copy(pos, camera.currPos);
+    glm_vec3_copy(pos, camera.targetPos);
+    glm_vec3_copy(front, camera.front);
+    glm_vec3_copy(up, camera.up);
+}
 
 // Set model matrix uniform in vertex shader
 void setModelUniform()
@@ -46,8 +54,8 @@ void setViewUniform()
     // Creating view matrix
     mat4 view;
     vec3 temp;
-    glm_vec3_add(cameraPos, cameraFront, temp);
-    glm_lookat(cameraPos, temp, cameraUp, view);
+    glm_vec3_add(camera.currPos, camera.front, temp);
+    glm_lookat(camera.currPos, temp, camera.up, view);
 
     // Setting view uniform
     int viewLoc = glGetUniformLocation(shaderProgram, "view");
@@ -60,53 +68,57 @@ void setProjectionUniform()
     // Creating projection matrix
     mat4 projection;
     glm_mat4_identity(projection);
-    glm_perspective(glm_rad(fov), (float)screenWidth / (float)screenHeight, 0.1f, 100.0f, projection);
+    glm_perspective(glm_rad(camera.FOV), (float)screenWidth / (float)screenHeight, 0.1f, 100.0f, projection);
 
     // Setting projection uniform
     int projectionLoc = glGetUniformLocation(shaderProgram, "projection");
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, projection);
 }
 
-// Moving camera
-void moveCamera(enum moveDirection dir)
+// Updates camera target position
+void moveCameraTarget(enum moveDirection dir)
 {
     // Speeds multiplies by deltatime to make it not fps-related
-    float cameraSpeed = 10.0f * deltaTime * cameraSpeedMultiplier;
-    vec3 temp, targetPos;
+    float cameraSpeed = DEFAULT_CAMERA_SPEED * deltaTime * camera.speedMultiplier;
+    vec3 temp;
 
     // Move camera forwards
     if (dir == FORWARD)
     {
-        glm_vec3_scale(cameraFront, cameraSpeed, temp);
-        glm_vec3_add(cameraPos, temp, targetPos);
+        glm_vec3_scale(camera.front, cameraSpeed, temp);
+        glm_vec3_add(camera.currPos, temp, camera.targetPos);
     }
 
     // Move camera backwards
-    if (dir == BACK)
+    if (dir == BACKWARDS)
     {
-        glm_vec3_scale(cameraFront, cameraSpeed, temp);
-        glm_vec3_sub(cameraPos, temp, targetPos);
+        glm_vec3_scale(camera.front, cameraSpeed, temp);
+        glm_vec3_sub(camera.currPos, temp, camera.targetPos);
     }
 
     // Move camera to the right
     if (dir == RIGHT)
     {
-        glm_vec3_cross(cameraFront, cameraUp, temp);
+        glm_vec3_cross(camera.front, camera.up, temp);
         glm_normalize(temp);
         glm_vec3_scale(temp, cameraSpeed, temp);
-        glm_vec3_add(cameraPos, temp, targetPos);
+        glm_vec3_add(camera.currPos, temp, camera.targetPos);
     }
 
     // Move camera to the left
     if (dir == LEFT)
     {
-        glm_vec3_cross(cameraFront, cameraUp, temp);
+        glm_vec3_cross(camera.front, camera.up, temp);
         glm_normalize(temp);
         glm_vec3_scale(temp, cameraSpeed, temp);
-        glm_vec3_sub(cameraPos, temp, targetPos);
+        glm_vec3_sub(camera.currPos, temp, camera.targetPos);
     }
 
-    glm_vec3_copy(targetPos, cameraPos);
+    // No flying
+    //targetPos[1] = 1.0f; 
+
+    updateCameraPosition();
+    camera.speedMultiplier = 1.0f;
 }
 
 // Updating camera position depending on mouse input
@@ -119,5 +131,5 @@ void applyMouseInput()
     direction[2] = sin(glm_rad(yaw)) * cos(glm_rad(pitch));
 
     // Applying changes to camera position
-    glm_normalize_to(direction, cameraFront);
+    glm_normalize_to(direction, camera.front);
 }
