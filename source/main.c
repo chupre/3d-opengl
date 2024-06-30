@@ -25,8 +25,10 @@ int main(int argc, char** argv)
     // Generate shader program
     setShader();
 
+    // Allocating memory for prop array
+    initPropArray();
+
     // Creating plane
-    Prop plane;
     int planeSize = 50.0f;
     GLfloat planeVertices[] = 
     {
@@ -37,7 +39,19 @@ int main(int argc, char** argv)
         planeSize, -planeSize, 0.0f,
         -planeSize,  planeSize, 0.0f,
     };
-    newProp(&plane, planeVertices, "plane", STATIC);
+    newProp(planeVertices, "plane", STATIC);
+
+    GLfloat h = 5.0f;
+    GLfloat plane2Vertices[] = 
+    {
+        -planeSize, -planeSize + h, 0.0 +h,
+        planeSize, -planeSize + h, 0.0f + h,
+        -planeSize,  planeSize + h, 0.0f + h,
+        planeSize, planeSize + h, 0.0f + h,
+        planeSize, -planeSize + h, 0.0f + h,
+        -planeSize,  planeSize + h, 0.0f + h,
+    };
+    newProp(plane2Vertices, "plane2", STATIC);
 
     // Player initialization
     initPlayer();
@@ -68,13 +82,15 @@ int main(int argc, char** argv)
             setModelUniform();
             setViewUniform();
             
-            glBindVertexArray(plane.VAO);
-            glDrawArrays(GL_TRIANGLES, 0, 6);
+            for (int i = 0; i < propCount; i++)
+            {
+                glBindVertexArray(props[i].VAO);
+                glDrawArrays(GL_TRIANGLES, 0, 6);
+            }
         }
 
         glfwSwapBuffers(window);
         glfwPollEvents();
-
     }
 
     // End of program

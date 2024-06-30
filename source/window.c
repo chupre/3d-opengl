@@ -8,6 +8,7 @@
 #include <camera.h>
 #include <shader.h>
 #include <render.h>
+#include <prop.h>
 
 // Window preinitialization
 GLchar* window_name = "3D-OpenGL";
@@ -165,5 +166,6 @@ GLvoid quit()
 {
     glDeleteProgram(shaderProgram);
     glfwTerminate();
+    free(props);
     exit(EXIT_SUCCESS);
 }

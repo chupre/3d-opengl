@@ -14,6 +14,7 @@ set(SOURCES
     source/camera.c
     source/keyboard_input.c
     source/window.c
+    source/prop.c
 )
 
 # Add executable target
