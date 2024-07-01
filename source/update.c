@@ -2,6 +2,7 @@
 #include <camera.h>
 #include <player.h>
 #include <update.h>
+#include <render.h>
 
 // Stores information about which sides camera must move each updateCameraPosition call.
 // Indices are { FORWARD, BACKWARDS, RIGHT, LEFT }.
