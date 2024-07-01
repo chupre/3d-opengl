@@ -4,7 +4,7 @@
 
 #define DEFAULT_FOV 60.0f
 #define DEFAULT_CAMERA_SPEED 1.0f
-#define RENDER_DISTANCE 200.0f
+#define RENDER_DISTANCE 2000.0f
 
 // Movement directions
 enum direction { FORWARD, BACKWARDS, RIGHT, LEFT };
