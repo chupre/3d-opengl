@@ -7,7 +7,7 @@
 🟢 Separate headers with .c files.\
 🟢 Reogranised CMakeLists.\
 🟢 Add render and update functions.\
-🔴 Move camera movement to update.\
+🟢 Move camera movement to update.\
 🔴 Add player collision.\
 🔴 Add jumping on space.\
 🔴 Add Anti Aliasing.\
