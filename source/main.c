@@ -50,7 +50,7 @@ int main(int argc, char** argv)
     // Activate shader
     glUseProgram(shaderProgram);
 
-    // Since projection matrix rarely changes there is no need to put in render loop
+    // Since projection matrix rarely changes there is no need to put it in render loop
     setProjectionUniform();
 
     // Main loop

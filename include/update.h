@@ -29,5 +29,6 @@ extern GLdouble deltaTimeTick;
 extern GLdouble timer;
 
 GLvoid updateGameTime();
+GLvoid updateCameraPosition();
 GLvoid update();
 GLvoid showFPS();

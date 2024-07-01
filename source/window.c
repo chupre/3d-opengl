@@ -95,6 +95,7 @@ GLvoid keyCallback(GLFWwindow* window, int key, int scancode, int action, int mo
         if (key == GLFW_KEY_N && action == GLFW_PRESS)
         {
             player.states.noclip = !player.states.noclip;
+            camera.targetPos[1] = 1.0f;
         }
 }
 

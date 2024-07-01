@@ -32,8 +32,37 @@ GLvoid updateGameTime()
     lastFrame = currentFrame;
 }
 
+// Updates camera position each tick
+GLvoid updateCameraPosition()
+{
+    // Moves camera depends on directions from user input
+    if (cameraMovement[FORWARD])
+    {
+        moveCameraTarget(FORWARD);
+    }
+    if (cameraMovement[BACKWARDS])
+    {
+        moveCameraTarget(BACKWARDS);
+    }
+    if (cameraMovement[LEFT])
+    {
+        moveCameraTarget(LEFT);
+    }
+    if (cameraMovement[RIGHT])
+    {
+        moveCameraTarget(RIGHT);
+    }
+
+    // Copy camera pos to player pos
+    glm_vec3_copy(camera.currPos, player.position);
+
+    // Reset speedMultiplier to default.
+    camera.speedMultiplier = 1.0f;
+}
+
 // Updates game state every tick
 GLvoid update()
 {
+    updateCameraPosition();
     updates++;
 }

@@ -35,37 +35,6 @@ GLvoid togglePause()
     }
 } 
 
-// Updates camera position each frame
-GLvoid updateCameraPosition()
-{
-    // Moves camera depends on directions from user input
-    if (cameraMovement[FORWARD])
-    {
-        moveCameraTarget(FORWARD);
-    }
-    if (cameraMovement[BACKWARDS])
-    {
-        moveCameraTarget(BACKWARDS);
-    }
-    if (cameraMovement[LEFT])
-    {
-        moveCameraTarget(LEFT);
-    }
-    if (cameraMovement[RIGHT])
-    {
-        moveCameraTarget(RIGHT);
-    }
-
-    // Applies linear interpolation
-    glm_vec3_lerp(camera.currPos, camera.targetPos, deltaTime * INTERPOLATION_MULTIPLIER, camera.currPos);
-
-    // Copy camera pos to player pos
-    glm_vec3_copy(camera.currPos, player.position);
-
-    // Reset speedMultiplier to default.
-    camera.speedMultiplier = 1.0f;
-}
-
 // Main render function
 GLvoid render()
 {
@@ -75,9 +44,9 @@ GLvoid render()
     setModelUniform();
     setViewUniform();
 
-    // Moving camera
-    updateCameraPosition();
-
+    // Apply linear interpolation to camera movement
+    glm_vec3_lerp(camera.currPos, camera.targetPos, deltaTime * INTERPOLATION_MULTIPLIER, camera.currPos);
+    
     // Rendering evry prop
     for (int i = 0; i < propCount; i++)
     {

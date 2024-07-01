@@ -2,9 +2,8 @@
 #include <glad/glad.h>
 #include <cglm/cglm.h>
 
-
 #define DEFAULT_FOV 60.0f
-#define DEFAULT_CAMERA_SPEED 10.0f
+#define DEFAULT_CAMERA_SPEED 1.0f
 #define RENDER_DISTANCE 200.0f
 
 // Movement directions

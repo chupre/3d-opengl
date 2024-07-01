@@ -13,6 +13,5 @@ extern bool isPaused;
 // Is app running. Intially set to true.
 extern bool isRunning;
 
-GLvoid updateCameraPosition();
 GLvoid togglePause();
 GLvoid render();

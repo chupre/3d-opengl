@@ -79,7 +79,7 @@ void setProjectionUniform()
 void moveCameraTarget(enum direction dir)
 {
     // Speeds multiplies by deltatime to make it not fps-related
-    float cameraSpeed = DEFAULT_CAMERA_SPEED * deltaTime * camera.speedMultiplier;
+    float cameraSpeed = DEFAULT_CAMERA_SPEED * deltaTimeTick * camera.speedMultiplier;
     vec3 temp;
 
     // Move camera forwards
