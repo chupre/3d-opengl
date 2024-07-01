@@ -8,46 +8,31 @@
 bool cameraMovement[4];
 
 // Variables to keep track of time between frames 
-GLfloat deltaTime = 0.0f;
-GLfloat lastFrame = 0.0f;
-GLfloat currentFrame;
+GLdouble deltaTime = 0.0f;
+GLdouble lastFrame = 0.0f;
+GLdouble currentFrame;
 
-// Updates camera position each frame
-GLvoid updateCameraPosition()
-{
-    // Moves camera depends on directions from user input
-    if (cameraMovement[FORWARD])
-    {
-        moveCameraTarget(FORWARD);
-    }
-    if (cameraMovement[BACKWARDS])
-    {
-        moveCameraTarget(BACKWARDS);
-    }
-    if (cameraMovement[LEFT])
-    {
-        moveCameraTarget(LEFT);
-    }
-    if (cameraMovement[RIGHT])
-    {
-        moveCameraTarget(RIGHT);
-    }
+// Tick time
+GLdouble tick = 1.0 / TICK_COUNT;
+GLdouble deltaTimeTick = 0.0f;
 
-    // Applies linear interpolation
-    glm_vec3_lerp(camera.currPos, camera.targetPos, deltaTime * INTERPOLATION_MULTIPLIER, camera.currPos);
+// Used for fps counter
+GLdouble timer = 0.0f;
 
-    // Copy camera pos to player pos
-    glm_vec3_copy(camera.currPos, player.position);
+// Update counter
+int updates = 0;
 
-    // Reset speedMultiplier to default.
-    camera.speedMultiplier = 1.0f;
-}
-
-    
 // Updates delta time to make stuff not fps-related
 GLvoid updateGameTime()
 {
     currentFrame = glfwGetTime();
     deltaTime = currentFrame - lastFrame;
+    deltaTimeTick += deltaTime / tick;
     lastFrame = currentFrame;
+}
+
+// Updates game state every tick
+GLvoid update()
+{
+    updates++;
 }

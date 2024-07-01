@@ -41,18 +41,6 @@ int main(int argc, char** argv)
     };
     newProp(planeVertices, "plane", STATIC);
 
-    GLfloat h = 5.0f;
-    GLfloat plane2Vertices[] = 
-    {
-        -planeSize, -planeSize + h, 0.0 +h,
-        planeSize, -planeSize + h, 0.0f + h,
-        -planeSize,  planeSize + h, 0.0f + h,
-        planeSize, planeSize + h, 0.0f + h,
-        planeSize, -planeSize + h, 0.0f + h,
-        -planeSize,  planeSize + h, 0.0f + h,
-    };
-    newProp(plane2Vertices, "plane2", STATIC);
-
     // Player initialization
     initPlayer();
 
@@ -69,25 +57,20 @@ int main(int argc, char** argv)
     while(isRunning)
     {
         updateGameTime();
-
-        updateCameraPosition();
-
         processKeyboardInput();
+
+        while (deltaTimeTick >= 1.0)
+        {
+            update();
+            deltaTimeTick--;
+        }
 
         if (!isPaused)
         {
-            glClearColor(0.529f, 0.808f, 0.922f, 1.0f);
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-            setModelUniform();
-            setViewUniform();
-            
-            for (int i = 0; i < propCount; i++)
-            {
-                glBindVertexArray(props[i].VAO);
-                glDrawArrays(GL_TRIANGLES, 0, 6);
-            }
+            render();
         }
+
+        showFPS();
 
         glfwSwapBuffers(window);
         glfwPollEvents();

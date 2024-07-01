@@ -4,6 +4,7 @@
 #include <shader.h>
 #include <window.h>
 #include <update.h>
+#include <render.h>
 
 // Camera offset by mouse input
 GLfloat pitch = 0.0f;

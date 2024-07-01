@@ -41,7 +41,10 @@ GLvoid setWindow()
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
     glViewport(0, 0, screenWidth, screenHeight);
     glEnable(GL_DEPTH_TEST);
-       
+
+    // Disable vsync
+    glfwSwapInterval(0);
+
     //Setting icon for window
     GLint iconWidth, iconHeight;
     GLint channels;

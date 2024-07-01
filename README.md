@@ -6,11 +6,11 @@
 🟢 Create player struct.\
 🟢 Separate headers with .c files.\
 🟢 Reogranised CMakeLists.\
-🔴 Add render and update functions.\
+🟢 Add render and update functions.\
 🔴 Add player collision.\
 🔴 Add jumping on space.\
 🔴 Add Anti Aliasing.\
 🔴 Implement textures (first - skybox).\
-🔴 Add text rendering.\
+🔴 Add text rendering (FPS counter).\
 🔴 Add model loader.\
 🔴 Add GUI for settings.
