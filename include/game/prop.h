@@ -1,6 +1,7 @@
 // Standard includes
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 // External
 #include <glad/glad.h>
@@ -13,6 +14,7 @@ typedef struct
 {
     GLuint VBO, VAO;
     GLint ID;
+    bool hasCollision;
     GLfloat vertices[PROP_VERTICES_SIZE];
     GLchar name[PROP_NAME_SIZE];
 } Prop;
@@ -24,6 +26,6 @@ extern Prop* props;
 extern GLint propCount;
 extern GLint propID;
 
-void newProp(GLfloat* vertices, GLchar* name, PropType type);
+void newProp(GLfloat* vertices, GLchar* name, PropType type, bool hasCollision);
 void initPropArray();
 void killProp(GLint ID);

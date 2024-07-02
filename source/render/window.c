@@ -34,6 +34,9 @@ GLvoid setWindow()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+    glfwWindowHint(GLFW_SAMPLES, 4);
+
+
 
     // Setting window
     window = glfwCreateWindow(screenWidth, screenHeight, window_name, NULL, NULL);
@@ -41,6 +44,9 @@ GLvoid setWindow()
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
     glViewport(0, 0, screenWidth, screenHeight);
     glEnable(GL_DEPTH_TEST);
+
+    // Turn on MSAA
+    glEnable(GL_MULTISAMPLE);
 
     // Disable vsync
     glfwSwapInterval(0);

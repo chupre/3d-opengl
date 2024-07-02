@@ -10,7 +10,7 @@
 🟢 Move camera movement to update.\
 🔴 Add player collision.\
 🔴 Add jumping on space.\
-🔴 Add Anti Aliasing.\
+🟢 Add MSAA.\
 🔴 Implement textures (first - skybox).\
 🔴 Add text rendering (FPS counter).\
 🔴 Add model loader.\

@@ -39,7 +39,7 @@ int main(int argc, char** argv)
         planeSize, -planeSize, 0.0f,
         -planeSize,  planeSize, 0.0f,
     };
-    newProp(planeVertices, "plane", STATIC);
+    newProp(planeVertices, "plane", STATIC, true);
 
     // Player initialization
     initPlayer();
@@ -65,6 +65,15 @@ int main(int argc, char** argv)
             deltaTimeTick--;
         }
 
+    // Plan on how to make collision:
+    // Make prop vertices dynamically allocated and store vertices size in struct.
+    // Add unique vertices set in prop.
+    // Add hasCollision bool to prop struct.
+    // Change the movement logic: first player moves, than camera.
+    // Every time player before player moves calls collisionDetect:
+    // collisionDetect checks if new player pos won't be in any unique vertices of every prop that has collision.
+    // Adjust noclip
+    
         if (!isPaused)
         {
             render();

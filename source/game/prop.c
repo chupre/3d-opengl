@@ -1,13 +1,14 @@
 // Custom modules
 #include <prop.h>
 
-Prop* props;
+Prop *props;
 GLint propCount = 0;
 GLint propID = 0;
 
-// Creates prop VBO and VAO and sets prop's fields 
-void newProp(GLfloat* vertices, GLchar* name, PropType type)
+// Creates prop VBO and VAO and sets prop's fields
+void newProp(GLfloat *vertices, GLchar *name, PropType type, bool hasCollision)
 {
+    // Allocating more memory to prop array
     if (propCount != 0)
     {
         props = realloc(props, sizeof(Prop) * (propCount + 1));
@@ -16,6 +17,8 @@ void newProp(GLfloat* vertices, GLchar* name, PropType type)
     // Setting unique ID for prop
     props[propCount].ID = propID;
     propID++;
+
+    props[propCount].hasCollision = hasCollision;
 
     // Setting vertices and names in prop
     memcpy(props[propCount].name, name, PROP_NAME_SIZE);
@@ -27,7 +30,7 @@ void newProp(GLfloat* vertices, GLchar* name, PropType type)
     glGenBuffers(1, &props[propCount].VBO);
     glBindBuffer(GL_ARRAY_BUFFER, props[propCount].VBO);
     glBufferData(GL_ARRAY_BUFFER, PROP_VERTICES_SIZE, vertices, type);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
     glEnableVertexAttribArray(0);
 
     // Unbinding for safety
@@ -54,14 +57,14 @@ void killProp(GLint ID)
         if (props[i].ID == ID)
         {
             currPropIndex = i;
-            break; 
+            break;
         }
     }
 
     // Deleting prop and moving array
     if (currPropIndex != -1)
     {
-        for (int  i = currPropIndex; i < propCount - 1; i++)
+        for (int i = currPropIndex; i < propCount - 1; i++)
         {
             memcpy(&props[i], &props[i + 1], sizeof(Prop));
         }
