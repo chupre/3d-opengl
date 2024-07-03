@@ -36,8 +36,6 @@ GLvoid setWindow()
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
     glfwWindowHint(GLFW_SAMPLES, 4);
 
-
-
     // Setting window
     window = glfwCreateWindow(screenWidth, screenHeight, window_name, NULL, NULL);
     glfwMakeContextCurrent(window);

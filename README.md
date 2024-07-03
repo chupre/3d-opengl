@@ -8,9 +8,11 @@
 🟢 Reogranised CMakeLists.\
 🟢 Add render and update functions.\
 🟢 Move camera movement to update.\
+🔴 Add different prop types.\
 🔴 Add player collision.\
-🔴 Add jumping on space.\
+🔴 Add gravity and jumping on space, adjust noclip.\
 🟢 Add MSAA.\
+🔴 Implement unique colors for props.\
 🔴 Implement textures (first - skybox).\
 🔴 Add text rendering (FPS counter).\
 🔴 Add model loader.\

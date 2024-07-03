@@ -13,5 +13,5 @@ void initPlayer()
     player.position[2] = 0.0f; 
 
     // Set states to default
-    player.states.noclip = true;
+    player.states.noclip = false;
 }

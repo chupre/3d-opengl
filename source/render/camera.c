@@ -81,19 +81,26 @@ void moveCameraTarget(enum direction dir)
     // Speeds multiplies by deltatime to make it not fps-related
     float cameraSpeed = DEFAULT_CAMERA_SPEED * deltaTimeTick * camera.speedMultiplier;
     vec3 temp;
+    vec3 newPos;
 
     // Move camera forwards
     if (dir == FORWARD)
     {
         glm_vec3_scale(camera.front, cameraSpeed, temp);
-        glm_vec3_add(camera.targetPos, temp, camera.targetPos);
+        glm_vec3_add(camera.targetPos, temp, newPos);
+
+        if (!collisionDetect(newPos))
+            glm_vec3_copy(newPos, camera.targetPos);
     }
 
     // Move camera backwards
     if (dir == BACKWARDS)
     {
         glm_vec3_scale(camera.front, cameraSpeed, temp);
-        glm_vec3_sub(camera.targetPos, temp, camera.targetPos);
+        glm_vec3_sub(camera.targetPos, temp, newPos);
+
+        if (!collisionDetect(newPos))
+            glm_vec3_copy(newPos, camera.targetPos);        
     }
 
     // Move camera to the right
@@ -102,7 +109,10 @@ void moveCameraTarget(enum direction dir)
         glm_vec3_cross(camera.front, camera.up, temp);
         glm_normalize(temp);
         glm_vec3_scale(temp, cameraSpeed, temp);
-        glm_vec3_add(camera.targetPos, temp, camera.targetPos);
+        glm_vec3_add(camera.targetPos, temp, newPos);
+
+        if (!collisionDetect(newPos))
+            glm_vec3_copy(newPos, camera.targetPos);        
     }
 
     // Move camera to the left
@@ -111,7 +121,10 @@ void moveCameraTarget(enum direction dir)
         glm_vec3_cross(camera.front, camera.up, temp);
         glm_normalize(temp);
         glm_vec3_scale(temp, cameraSpeed, temp);
-        glm_vec3_sub(camera.targetPos, temp, camera.targetPos);
+        glm_vec3_sub(camera.targetPos, temp, newPos);
+
+        if (!collisionDetect(newPos))
+            glm_vec3_copy(newPos, camera.targetPos);        
     }
 
     // Noclip

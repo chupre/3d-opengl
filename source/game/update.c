@@ -3,6 +3,7 @@
 #include <player.h>
 #include <update.h>
 #include <render.h>
+#include <prop.h>
 
 // Stores information about which sides camera must move each updateCameraPosition call.
 // Indices are { FORWARD, BACKWARDS, RIGHT, LEFT }.
@@ -65,4 +66,21 @@ GLvoid update()
 {
     updateCameraPosition();
     updates++;
+}
+
+// Checks collision for every prop, return true if there is collision
+bool collisionDetect(vec3 newPos)
+{
+    if (player.states.noclip)
+        return false;
+
+    for (int i = 0; i < propCount; i++)
+    {
+        if (props[i].hasCollision)
+        {
+            return false;
+        }
+    }
+
+    return false;
 }
