@@ -20,21 +20,13 @@ int main(int argc, char** argv)
     // Generate shader program
     setShader();
 
-    // Allocating memory for prop array
     initPropArray();
 
     // Creating plane
-    int planeSize = 50.0f;
-    GLfloat planeVertices[] = 
-    {
-        -planeSize, -planeSize, 0.0f,
-        planeSize, -planeSize, 0.0f,
-        -planeSize,  planeSize, 0.0f,
-        planeSize, planeSize, 0.0f,
-        planeSize, -planeSize, 0.0f,
-        -planeSize,  planeSize, 0.0f,
-    };
-    newProp(planeVertices, "plane", STATIC, true);
+    vec3 planeOffset = {50.0f, 50.0f, 0.0f};
+    vec3 planePos = { 0.0f, 0.0f, 0.0f };
+    Prop plane;
+    newProp(&plane, planePos, planeOffset, true);
 
     // Player initialization
     initPlayer();
@@ -59,14 +51,7 @@ int main(int argc, char** argv)
             update();
             deltaTimeTick--;
         }
-
-    // Plan on how to make collision:
-    // Add hasCollision bool to prop struct. +
-    // Every time player before player moves calls collisionDetect:
-    // collisionDetect checks if new player pos won't be in any vertices of every prop that has collision.
-    // Adjust noclip.
-    // No need to move vertices on heap because vertices will be remaked when model loading is done. 
-    
+        
         if (!isPaused)
         {
             render();

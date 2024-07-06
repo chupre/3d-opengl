@@ -48,10 +48,13 @@ GLvoid render()
     glm_vec3_lerp(camera.currPos, camera.targetPos, deltaTime * INTERPOLATION_MULTIPLIER, camera.currPos);
     
     // Rendering evry prop
-    for (int i = 0; i < propCount; i++)
+    for (int i = 0; i < MAX_PROPS; i++)
     {
-        glBindVertexArray(props[i].VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+        if (props[i] != NULL)
+        {
+            glBindVertexArray(props[i]->VAO);
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+        }
     }
 
     frames++;

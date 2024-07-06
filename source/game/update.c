@@ -74,13 +74,7 @@ bool collisionDetect(vec3 newPos)
     if (player.states.noclip)
         return false;
 
-    for (int i = 0; i < propCount; i++)
-    {
-        if (props[i].hasCollision)
-        {
-            return false;
-        }
-    }
+    // prop loop
 
     return false;
 }

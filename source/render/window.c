@@ -174,6 +174,5 @@ GLvoid quit()
 {
     glDeleteProgram(shaderProgram);
     glfwTerminate();
-    free(props);
     exit(EXIT_SUCCESS);
 }

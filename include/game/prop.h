@@ -5,27 +5,23 @@
 
 // External
 #include <glad/glad.h>
+#include <cglm/cglm.h>
 
-#define PROP_VERTICES_SIZE sizeof(float) * 3 * 6
-#define PROP_NAME_SIZE 128
+#define PROP_MAX_VERTICES 64
+#define MAX_PROPS 128
 
 // Object struct
 typedef struct
 {
     GLuint VBO, VAO;
-    GLint ID;
     bool hasCollision;
-    GLfloat vertices[PROP_VERTICES_SIZE];
-    GLchar name[PROP_NAME_SIZE];
+    vec3 offset;
+    vec3 pos;
+    vec3 vertices[PROP_MAX_VERTICES];
 } Prop;
 
-// Usage: DYNAMIC - for dynamic draw, STATIC - for static draw
-typedef enum { STATIC = GL_STATIC_DRAW, DYNAMIC = GL_DYNAMIC_DRAW } PropType;
+extern Prop* props[MAX_PROPS];
 
-extern Prop* props;
-extern GLint propCount;
-extern GLint propID;
-
-void newProp(GLfloat* vertices, GLchar* name, PropType type, bool hasCollision);
+void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision);
+void killProp(Prop* prop);
 void initPropArray();
-void killProp(GLint ID);
