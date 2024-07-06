@@ -8,7 +8,7 @@
 🟢 Reogranised CMakeLists.\
 🟢 Add render and update functions.\
 🟢 Move camera movement to update.\
-🔴 Add different prop types.\
+🟢 Add different prop types.\
 🔴 Add player collision.\
 🔴 Add gravity and jumping on space, adjust noclip.\
 🟢 Add MSAA.\
