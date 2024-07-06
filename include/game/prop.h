@@ -18,6 +18,7 @@ typedef struct
     vec3 offset;
     vec3 pos;
     vec3 vertices[PROP_MAX_VERTICES];
+    mat4 model;
 } Prop;
 
 extern Prop* props[MAX_PROPS];

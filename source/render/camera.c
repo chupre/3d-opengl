@@ -36,13 +36,8 @@ void initCamera()
 }
 
 // Set model matrix uniform in vertex shader
-void setModelUniform()
+void setModelUniform(mat4 model)
 {
-    // Creating model matrix
-    mat4 model;
-    glm_mat4_identity(model);
-    glm_rotate(model, glm_rad(-90.0f), X_AXIS);
-
     // Setting model uniform
     int modelLoc = glGetUniformLocation(shaderProgram, "model");
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, model);

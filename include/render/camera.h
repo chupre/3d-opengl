@@ -39,7 +39,7 @@ extern vec3 Z_AXIS;
 extern Camera camera;
 
 void initCamera();
-void setModelUniform();
+void setModelUniform(mat4 model);
 void setViewUniform();
 void setProjectionUniform();
 void moveCameraTarget(enum direction dir);

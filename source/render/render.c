@@ -41,7 +41,6 @@ GLvoid render()
     glClearColor(0.529f, 0.808f, 0.922f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    setModelUniform();
     setViewUniform();
 
     // Apply linear interpolation to camera movement
@@ -52,6 +51,8 @@ GLvoid render()
     {
         if (props[i] != NULL)
         {
+            setModelUniform(props[i]->model);
+
             glBindVertexArray(props[i]->VAO);
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }

@@ -1,5 +1,6 @@
 // Custom modules
 #include <prop.h>
+#include <camera.h>
 
 Prop* props[MAX_PROPS];
 
@@ -16,12 +17,10 @@ void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision)
         }
     }
 
-    prop->hasCollision = hasCollision;
-
     // Setting vertices and names in prop
-    GLfloat x = pos[0] + offset[0];
-    GLfloat y = pos[1] + offset[1];
-    GLfloat z = pos[2] + offset[2];
+    GLfloat x = offset[0];
+    GLfloat y = offset[1];
+    GLfloat z = offset[2];
     GLfloat propVertices[] = 
     {
     -x, -y, -z,
@@ -68,6 +67,14 @@ void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision)
     };
     memcpy(prop->vertices, propVertices, sizeof(propVertices));
 
+    memcpy(prop->offset, offset, sizeof(vec3));
+    memcpy(prop->pos, pos, sizeof(vec3));
+    prop->hasCollision = hasCollision;
+
+    // Setting model matrix
+    glm_mat4_identity(prop->model);
+    glm_translate(prop->model, prop->pos);
+    
     // Setting VBO and VAO
     glGenVertexArrays(1, &prop->VAO);
     glBindVertexArray(prop->VAO);
@@ -98,7 +105,7 @@ void killProp(Prop* prop)
     {
         if (props[i] == prop)
         {
-            props[i] = NULL;
+            props[i] = NULL;    
             return;
         }
     }
