@@ -17,7 +17,7 @@ void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision)
         }
     }
 
-    // Setting vertices and names in prop
+    // Setting vertices in prop
     GLfloat x = offset[0];
     GLfloat y = offset[1];
     GLfloat z = offset[2];
@@ -66,10 +66,21 @@ void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision)
     -x,  y, -z,
     };
     memcpy(prop->vertices, propVertices, sizeof(propVertices));
-
     memcpy(prop->offset, offset, sizeof(vec3));
     memcpy(prop->pos, pos, sizeof(vec3));
+
+    // Setting collision
     prop->hasCollision = hasCollision;
+
+    // Setting prop bounding box for collision
+    vec3 leftDownVertex = { pos[0] - x, pos[1] - y, pos[2] - z };
+    vec3 rightDownVertex = { pos[0] + x, pos[1] - y, pos[2] + z };
+    vec3 leftUpVertex = { pos[0] - x, pos[1] + y, pos[2] - z };
+    vec3 rightUpVertex = { pos[0] + x, pos[1] + y, pos[2] + z };
+    memcpy(prop->bbox[0], leftDownVertex, sizeof(vec3));
+    memcpy(prop->bbox[1], rightDownVertex, sizeof(vec3));
+    memcpy(prop->bbox[2], leftUpVertex, sizeof(vec3));
+    memcpy(prop->bbox[3], rightUpVertex, sizeof(vec3));
 
     // Setting model matrix
     glm_mat4_identity(prop->model);
@@ -84,7 +95,7 @@ void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision)
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
     glEnableVertexAttribArray(0);
 
-    // Unbinding for safety
+    // Unbinding
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

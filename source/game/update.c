@@ -67,14 +67,3 @@ GLvoid update()
     updateCameraPosition();
     updates++;
 }
-
-// Checks collision for every prop, return true if there is collision
-bool collisionDetect(vec3 newPos)
-{
-    if (player.states.noclip)
-        return false;
-
-    // prop loop
-
-    return false;
-}

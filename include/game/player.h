@@ -17,10 +17,11 @@ typedef struct
 {
     vec3 position;
     vec3 bbox[4];
-    GLfloat height;
+    GLfloat height, width, depth;
     playerState states;
 } Player;
 
 extern Player player;
 
 void initPlayer();
+void getNewPlayerBbox(vec3 pos, vec3 bbox[4]);

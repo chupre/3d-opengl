@@ -22,16 +22,41 @@ int main(int argc, char** argv)
 
     initPropArray();
 
-    // Creating plane
-    vec3 planeOffset = {50.0f, 30.0f, 10.0f};
-    vec3 planePos = { 0.0f, -30.0f, 0.0f };
+    // Creating test objects
+    vec3 planeOffset = {50.0f, 0.0f, 50.0f};
+    vec3 planePos = { 0.0f, 0.0f, 0.0f };
     Prop plane;
     newProp(&plane, planePos, planeOffset, true);
 
-    vec3 testOffset = {10.0f, 10.0f, 10.0f };
-    vec3 testPos = { 10.0f, 100.0f, 10.0f };
-    Prop test;
-    newProp(&test, testPos, testOffset, true);
+    vec3 test1Offset = {2.0f, 5.0f, 2.0f };
+    vec3 test1Pos = { 10.0f, 5.0f, 0.0f };
+    Prop test1;
+    newProp(&test1, test1Pos, test1Offset, true);
+
+    vec3 test2Offset = {2.0f, 5.0f, 2.0f };
+    vec3 test2Pos = { -10.0f, 5.0f, 0.0f };
+    Prop test2;
+    newProp(&test2, test2Pos, test2Offset, true);
+
+    vec3 test3Offset = {2.0f, 5.0f, 2.0f };
+    vec3 test3Pos = { 10.0f, 5.0f, 10.0f };
+    Prop test3;
+    newProp(&test3, test3Pos, test3Offset, true);
+
+    vec3 test4Offset = {2.0f, 5.0f, 2.0f };
+    vec3 test4Pos = { -10.0f, 5.0f, 10.0f };
+    Prop test4;
+    newProp(&test4, test4Pos, test4Offset, true);
+
+    vec3 test5Offset = {12.0f, 0.0f, 7.0f };
+    vec3 test5Pos = { 0.0f, 10.0f, 5.0f };
+    Prop test5;
+    newProp(&test5, test5Pos, test5Offset, true);
+
+    vec3 test6Offset = {4.0f, 15.0f, 700.0f };
+    vec3 test6Pos = { -60.0f, 0.0f, 5.0f };
+    Prop test6;
+    newProp(&test6, test6Pos, test6Offset, true);
 
     // Player initialization
     initPlayer();
@@ -56,10 +81,6 @@ int main(int argc, char** argv)
             update();
             deltaTimeTick--;
         }
-
-        // create player bounding box in player struct (remove height)
-        // create avl tree for props (figure out how to sort it tho) https://stackoverflow.com/questions/1960560/how-does-3d-collision-object-detection-work
-        // add collision based on https://chriscourses.com/blog/how-to-code-3d-collision-detection
 
         if (!isPaused)
         {

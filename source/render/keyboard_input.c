@@ -39,7 +39,7 @@ void processKeyboardInput()
                     break;
 
                 case GLFW_KEY_LEFT_SHIFT:
-                    camera.speedMultiplier = 2.0f;
+                    camera.speedMultiplier = DEFAULT_CAMERA_SPEED_MULTIPLIER;
                     break;
             }
         }

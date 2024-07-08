@@ -5,6 +5,7 @@
 #include <window.h>
 #include <update.h>
 #include <render.h>
+#include <collision.h>
 
 // Camera offset by mouse input
 GLfloat pitch = 0.0f;
@@ -125,7 +126,7 @@ void moveCameraTarget(enum direction dir)
     // Noclip
     if (!player.states.noclip)
     {
-        camera.targetPos[1] = 1.0f; 
+        camera.targetPos[1] = 1.1f; 
     }
 }
 

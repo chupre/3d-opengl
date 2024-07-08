@@ -10,7 +10,7 @@
 #define PROP_MAX_VERTICES 64
 #define MAX_PROPS 128
 
-// Object struct
+// Prop struct
 typedef struct
 {
     GLuint VBO, VAO;
@@ -18,6 +18,7 @@ typedef struct
     vec3 offset;
     vec3 pos;
     vec3 vertices[PROP_MAX_VERTICES];
+    vec3 bbox[4];
     mat4 model;
 } Prop;
 

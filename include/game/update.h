@@ -32,4 +32,3 @@ GLvoid updateGameTime();
 GLvoid updateCameraPosition();
 GLvoid update();
 GLvoid showFPS();
-bool collisionDetect(vec3 newPos);

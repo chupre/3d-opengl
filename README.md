@@ -9,11 +9,14 @@
 🟢 Add render and update functions.\
 🟢 Move camera movement to update.\
 🟢 Add different prop types.\
-🔴 Add player collision.\
-🔴 Add gravity and jumping on space, adjust noclip.\
 🟢 Add MSAA.\
+🟢 Add simple player collision.\
+🔴 Add octree optimization.\
 🔴 Implement unique colors for props.\
-🔴 Implement textures (first - skybox).\
+🔴 Add basic lightning.\
+🔴 Add gravity (for both player and props) and jumping on space, adjust noclip (separate fly and noclip).\
+🔴 Add collision response for props.\
+🔴 Implement textures and skybox.\
 🔴 Add text rendering (FPS counter).\
 🔴 Add model loader.\
 🔴 Add GUI for settings.\
