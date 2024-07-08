@@ -28,6 +28,11 @@ int main(int argc, char** argv)
     Prop plane;
     newProp(&plane, planePos, planeOffset, true);
 
+    vec3 testOffset = {10.0f, 10.0f, 10.0f };
+    vec3 testPos = { 10.0f, 100.0f, 10.0f };
+    Prop test;
+    newProp(&test, testPos, testOffset, true);
+
     // Player initialization
     initPlayer();
 
@@ -51,7 +56,11 @@ int main(int argc, char** argv)
             update();
             deltaTimeTick--;
         }
-        
+
+        // create player bounding box in player struct (remove height)
+        // create avl tree for props (figure out how to sort it tho) https://stackoverflow.com/questions/1960560/how-does-3d-collision-object-detection-work
+        // add collision based on https://chriscourses.com/blog/how-to-code-3d-collision-detection
+
         if (!isPaused)
         {
             render();

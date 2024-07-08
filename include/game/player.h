@@ -16,6 +16,7 @@ typedef struct
 typedef struct
 {
     vec3 position;
+    vec3 bbox[4];
     GLfloat height;
     playerState states;
 } Player;

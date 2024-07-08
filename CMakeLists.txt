@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 project(3D-OpenGL VERSION 0.1.0 LANGUAGES C)
 
 # Include directories
-include_directories(external include/game include/render)
+include_directories(external include/game include/render include/game/physics)
 
 # Gather all .c source files
 set(SOURCES
@@ -15,6 +15,7 @@ set(SOURCES
     source/render/keyboard_input.c
     source/render/window.c
     source/game/prop.c
+    source/game/physics/collision.c
 )
 
 # Add executable target

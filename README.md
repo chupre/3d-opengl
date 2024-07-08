@@ -16,4 +16,5 @@
 🔴 Implement textures (first - skybox).\
 🔴 Add text rendering (FPS counter).\
 🔴 Add model loader.\
-🔴 Add GUI for settings.
+🔴 Add GUI for settings.\
+🔴 Add raycasting.
