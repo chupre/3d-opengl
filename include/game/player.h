@@ -5,6 +5,9 @@
 #include <glad/glad.h>
 #include <cglm/cglm.h>
 
+ // Custom modules
+#include <bbox.h>
+
 // Struct for storing all kinds of temporary states player could be in.
 typedef struct
 {
@@ -16,7 +19,7 @@ typedef struct
 typedef struct
 {
     vec3 position;
-    vec3 bbox[4];
+    Bbox bbox;
     GLfloat height, width, depth;
     playerState states;
 } Player;
@@ -24,4 +27,4 @@ typedef struct
 extern Player player;
 
 void initPlayer();
-void getNewPlayerBbox(vec3 pos, vec3 bbox[4]);
+void getNewPlayerBbox(vec3 pos, Bbox* b);

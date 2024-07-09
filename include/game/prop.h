@@ -7,6 +7,9 @@
 #include <glad/glad.h>
 #include <cglm/cglm.h>
 
+// Custom modules
+#include <bbox.h>
+
 #define PROP_MAX_VERTICES 64
 #define MAX_PROPS 128
 
@@ -18,7 +21,7 @@ typedef struct
     vec3 offset;
     vec3 pos;
     vec3 vertices[PROP_MAX_VERTICES];
-    vec3 bbox[4];
+    Bbox bbox;
     mat4 model;
 } Prop;
 

@@ -11,7 +11,7 @@ void initPlayer() {
     player.width = 1.0f;
     player.depth = 1.0f;
     
-    getNewPlayerBbox(player.position, player.bbox);
+    getNewPlayerBbox(player.position, &player.bbox);
 
     // Set in world center
     player.position[0] = 0.0f;
@@ -23,7 +23,7 @@ void initPlayer() {
 }
 
 // Stores in dest new player bounding box related to pos vector
-void getNewPlayerBbox(vec3 pos, vec3 bbox[4]) {
+void getNewPlayerBbox(vec3 pos, Bbox* b) {
     GLfloat x = pos[0];
     GLfloat y = pos[1];
     GLfloat z = pos[2];
@@ -33,8 +33,12 @@ void getNewPlayerBbox(vec3 pos, vec3 bbox[4]) {
     vec3 rightDownVertex = { x + player.width, y - player.height, z + player.depth };
     vec3 leftUpVertex = { x - player.width, y, z - player.depth };
     vec3 rightUpVertex = { x + player.width, y, z + player.depth };
-    memcpy(bbox[0], leftDownVertex, sizeof(vec3));
-    memcpy(bbox[1], rightDownVertex, sizeof(vec3));
-    memcpy(bbox[2], leftUpVertex, sizeof(vec3));
-    memcpy(bbox[3], rightUpVertex, sizeof(vec3));
+    memcpy(b->corners[0], leftDownVertex, sizeof(vec3));
+    memcpy(b->corners[1], rightDownVertex, sizeof(vec3));
+    memcpy(b->corners[2], leftUpVertex, sizeof(vec3));
+    memcpy(b->corners[3], rightUpVertex, sizeof(vec3));
+
+    // Setting min and max vectors
+    memcpy(b->max, b->corners[3], sizeof(vec3));
+    memcpy(b->min, b->corners[0], sizeof(vec3));
 }

@@ -7,7 +7,7 @@
 #include <cglm/cglm.h>
 
 // Custom modules
-#include <prop.h>
+#include <bbox.h>
 
 bool collisionDetect(vec3 newPos);
-bool AABBcollision(vec3 bbox_1[4], vec3 bbox_2[4]);
+bool AABBcollision(Bbox a, Bbox b);
