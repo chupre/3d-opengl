@@ -28,17 +28,9 @@ void getNewPlayerBbox(vec3 pos, Bbox* b) {
     GLfloat y = pos[1];
     GLfloat z = pos[2];
 
-    // Setting player bounding box for collision
-    vec3 leftDownVertex = { x - player.width, y - player.height, z - player.depth };
-    vec3 rightDownVertex = { x + player.width, y - player.height, z + player.depth };
-    vec3 leftUpVertex = { x - player.width, y, z - player.depth };
-    vec3 rightUpVertex = { x + player.width, y, z + player.depth };
-    memcpy(b->corners[0], leftDownVertex, sizeof(vec3));
-    memcpy(b->corners[1], rightDownVertex, sizeof(vec3));
-    memcpy(b->corners[2], leftUpVertex, sizeof(vec3));
-    memcpy(b->corners[3], rightUpVertex, sizeof(vec3));
-
-    // Setting min and max vectors
-    memcpy(b->max, b->corners[3], sizeof(vec3));
-    memcpy(b->min, b->corners[0], sizeof(vec3));
+    // Setting min and max vectors in bbox
+    vec3 bouningBoxMax = { x + player.width, y, z + player.depth };
+    vec3 bouningBoxMin = { x - player.width, y - player.height, z - player.depth };
+    memcpy(b->max, bouningBoxMax, sizeof(vec3));
+    memcpy(b->min, bouningBoxMin, sizeof(vec3));
 }

@@ -72,19 +72,11 @@ void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision)
     // Setting collision
     prop->hasCollision = hasCollision;
 
-    // Setting prop bounding box for collision
-    vec3 leftDownVertex = { pos[0] - x, pos[1] - y, pos[2] - z };
-    vec3 rightDownVertex = { pos[0] + x, pos[1] - y, pos[2] + z };
-    vec3 leftUpVertex = { pos[0] - x, pos[1] + y, pos[2] - z };
-    vec3 rightUpVertex = { pos[0] + x, pos[1] + y, pos[2] + z };
-    memcpy(prop->bbox.corners[0], leftDownVertex, sizeof(vec3));
-    memcpy(prop->bbox.corners[1], rightDownVertex, sizeof(vec3));
-    memcpy(prop->bbox.corners[2], leftUpVertex, sizeof(vec3));
-    memcpy(prop->bbox.corners[3], rightUpVertex, sizeof(vec3));
-
     // Setting min and max vectors in bbox
-    memcpy(prop->bbox.max, prop->bbox.corners[3], sizeof(vec3));
-    memcpy(prop->bbox.min, prop->bbox.corners[0], sizeof(vec3));
+    vec3 boundingBoxMax = { pos[0] + x, pos[1] + y, pos[2] + z };
+    vec3 boundingBoxMin = { pos[0] - x, pos[1] - y, pos[2] - z };
+    memcpy(prop->bbox.max, boundingBoxMax, sizeof(vec3));
+    memcpy(prop->bbox.min, boundingBoxMin, sizeof(vec3));
 
     // Setting model matrix
     glm_mat4_identity(prop->model);

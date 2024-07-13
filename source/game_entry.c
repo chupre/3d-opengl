@@ -11,6 +11,7 @@
 #include <keyboard_input.h>
 #include <window.h>
 #include <prop.h>
+#include <collision.h>
 
 int main(int argc, char** argv)
 {
@@ -20,7 +21,9 @@ int main(int argc, char** argv)
     // Generate shader program
     setShader();
 
+    // Preinitializing prop pointers array and octree
     initPropArray();
+    //root = newOctTree();
 
     // Creating test objects
     vec3 planeOffset = {50.0f, 0.0f, 50.0f};
@@ -53,7 +56,7 @@ int main(int argc, char** argv)
     Prop test5;
     newProp(&test5, test5Pos, test5Offset, true);
 
-    vec3 test6Offset = {4.0f, 15.0f, 700.0f };
+    vec3 test6Offset = {4.0f, 15.0f, 2000.0f };
     vec3 test6Pos = { -60.0f, 0.0f, 5.0f };
     Prop test6;
     newProp(&test6, test6Pos, test6Offset, true);

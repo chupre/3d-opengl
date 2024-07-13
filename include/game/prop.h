@@ -1,3 +1,5 @@
+#pragma once
+
 // Standard includes
 #include <string.h>
 #include <stdlib.h>

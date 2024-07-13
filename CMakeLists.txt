@@ -6,7 +6,7 @@ include_directories(external include/game include/render include/game/physics)
 
 # Gather all .c source files
 set(SOURCES
-    source/main.c
+    source/game_entry.c
     source/render/shader.c
     source/game/player.c
     source/game/update.c

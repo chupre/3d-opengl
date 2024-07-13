@@ -5,6 +5,9 @@
 #include <render.h>
 #include <prop.h>
 
+// Root scene size - World size
+GLfloat worldSize = 2000.0f;
+
 // Stores information about which sides camera must move each updateCameraPosition call.
 // Indices are { FORWARD, BACKWARDS, RIGHT, LEFT }.
 bool cameraMovement[4];

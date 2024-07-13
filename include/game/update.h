@@ -16,6 +16,10 @@ extern bool cameraMovement[4];
 // Update counter
 extern int updates;
 
+// Root scene size - World size
+extern GLfloat worldSize;
+
+
 // Variables to keep track of time between frames 
 extern GLdouble deltaTime;
 extern GLdouble lastFrame;

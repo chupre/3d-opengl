@@ -3,16 +3,18 @@
 #include <player.h>
 #include <prop.h>
 
+OctreeNode root;
+
 // Checks collision for every prop, return true if there is collision
 bool collisionDetect(vec3 newPos) {
     if (player.states.noclip)
         return false;
 
-    Bbox newBbox;
-    getNewPlayerBbox(newPos, &newBbox);
+    Bbox newPlayerBbox;
+    getNewPlayerBbox(newPos, &newPlayerBbox);
 
     for (int i = 0; i < MAX_PROPS; i++) {
-        if (props[i]  && props[i]->hasCollision && AABBcollision(newBbox, props[i]->bbox))
+        if (props[i]  && props[i]->hasCollision && AABBcollision(newPlayerBbox, props[i]->bbox))
             return true;
     }
     
