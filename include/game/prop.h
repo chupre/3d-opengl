@@ -9,11 +9,13 @@
 #include <glad/glad.h>
 #include <cglm/cglm.h>
 
-// Custom modules
+// Custom modules MAX_PROPS; i
 #include <bbox.h>
 
 #define PROP_MAX_VERTICES 64
 #define MAX_PROPS 128
+
+extern int active_props;
 
 // Prop struct
 typedef struct

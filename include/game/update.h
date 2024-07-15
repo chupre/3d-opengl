@@ -7,7 +7,7 @@
 #include <cglm/cglm.h>
 
 #define TICK_COUNT 60.0
-#define INTERPOLATION_MULTIPLIER 3.0f
+#define INTERPOLATION_MULTIPLIER 5.0f
 
 // Stores information about which sides camera must move each updateCameraPosition call.
 // Indices are { FORWARD, BACKWARDS, RIGHT, LEFT }.
@@ -18,7 +18,6 @@ extern int updates;
 
 // Root scene size - World size
 extern GLfloat worldSize;
-
 
 // Variables to keep track of time between frames 
 extern GLdouble deltaTime;

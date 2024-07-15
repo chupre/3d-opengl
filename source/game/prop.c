@@ -3,6 +3,7 @@
 #include <camera.h>
 
 Prop* props[MAX_PROPS];
+int active_props = 0;
 
 // Creates prop VBO and VAO and sets prop's fields
 void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision)
@@ -65,12 +66,15 @@ void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision)
     -x,  y,  z,
     -x,  y, -z,
     };
+    
     memcpy(prop->vertices, propVertices, sizeof(propVertices));
     memcpy(prop->offset, offset, sizeof(vec3));
     memcpy(prop->pos, pos, sizeof(vec3));
 
     // Setting collision
     prop->hasCollision = hasCollision;
+
+    active_props++;
 
     // Setting min and max vectors in bbox
     vec3 boundingBoxMax = { pos[0] + x, pos[1] + y, pos[2] + z };
@@ -113,6 +117,7 @@ void killProp(Prop* prop)
         if (props[i] == prop)
         {
             props[i] = NULL;    
+            active_props--;
             return;
         }
     }

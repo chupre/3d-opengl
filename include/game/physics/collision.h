@@ -21,3 +21,5 @@ extern OctreeNode root;
 
 bool collisionDetect(vec3 newPos);
 bool AABBcollision(Bbox a, Bbox b);
+OctreeNode newOctree(float xMin, float yMin, float zMin, float xMax, float yMax, float zMax);
+void insertOctreeProp(Prop* prop, OctreeNode* node);

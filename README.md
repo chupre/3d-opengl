@@ -12,11 +12,11 @@
 🟢 Add MSAA.\
 🟢 Add simple player collision.\
 🔴 Add octree optimization.\
-🔴 Implement unique colors for props.\
-🔴 Add basic lightning.\
-🔴 Add gravity (for both player and props) and jumping on space, adjust noclip (separate fly and noclip).\
-🔴 Add collision response for props.\
 🔴 Implement textures and skybox.\
+🔴 Add basic lightning.\
+🔴 Fix movement.\
+🔴 Add gravity (for both player and props) and jumping on space, adjust noclip (separate fly and noclip).\
+🔴 Add collision response for props (add basic physics).\
 🔴 Add text rendering (FPS counter).\
 🔴 Add model loader.\
 🔴 Add GUI for settings.\

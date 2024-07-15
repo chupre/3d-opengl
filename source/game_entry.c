@@ -23,7 +23,7 @@ int main(int argc, char** argv)
 
     // Preinitializing prop pointers array and octree
     initPropArray();
-    //root = newOctTree();
+    root = newOctree(-worldSize, -worldSize, -worldSize, worldSize, worldSize, worldSize);
 
     // Creating test objects
     vec3 planeOffset = {50.0f, 0.0f, 50.0f};
@@ -74,21 +74,18 @@ int main(int argc, char** argv)
     setProjectionUniform();
 
     // Main loop
-    while(isRunning)
-    {
+    while(isRunning) {
         updateGameTime();
         processKeyboardInput();
 
-        while (deltaTimeTick >= 1.0)
-        {
+        if (!isPaused) {
+            while (deltaTimeTick >= 1.0) {
             update();
             deltaTimeTick--;
         }
-
-        if (!isPaused)
-        {
-            render();
         }
+
+        render();
 
         showFPS();
 

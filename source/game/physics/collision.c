@@ -13,7 +13,7 @@ bool collisionDetect(vec3 newPos) {
     Bbox newPlayerBbox;
     getNewPlayerBbox(newPos, &newPlayerBbox);
 
-    for (int i = 0; i < MAX_PROPS; i++) {
+    for (int i = 0; i < active_props; i++) {
         if (props[i]  && props[i]->hasCollision && AABBcollision(newPlayerBbox, props[i]->bbox))
             return true;
     }
@@ -34,5 +34,27 @@ bool AABBcollision(Bbox a, Bbox b) {
     );
 
     return false;
+}
+
+// Returns a new octree node
+OctreeNode newOctree(float xMin, float yMin, float zMin, float xMax, float yMax, float zMax)
+{
+    // Initializing the node
+    OctreeNode node;
+    node.nodeRegion.min[0] = xMin;
+    node.nodeRegion.min[1] = yMin;
+    node.nodeRegion.min[2] = zMin;
+    node.nodeRegion.max[0] = xMax;
+    node.nodeRegion.max[1] = yMax;
+    node.nodeRegion.max[2] = zMax;
+    node.props = NULL;
+    for (int i = 0; i < 8; i++)
+        node.children[i] = NULL;
+}
+
+// Recursively inserts a prop in node by dividing the octree
+void insertOctreeProp(Prop* prop, OctreeNode* node)
+{
+    
 }
 
