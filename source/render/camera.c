@@ -6,6 +6,7 @@
 #include <update.h>
 #include <render.h>
 #include <collision.h>
+#include <vector.h>
 
 // Camera offset by mouse input
 GLfloat pitch = 0.0f;
@@ -25,15 +26,11 @@ void initCamera()
     camera.FOV = DEFAULT_FOV;
     camera.speedMultiplier = 1.0f;
 
-    // Setting camera vectors
-    vec3 front = { 0.0f, 0.0f, -1.0f };
-    vec3 up = { 0.0f, 1.0f, 0.0f };
-
     // Camera pos is equal to player pos
     glm_vec3_copy(player.position, camera.currPos);
     glm_vec3_copy(player.position, camera.targetPos);
-    glm_vec3_copy(front, camera.front);
-    glm_vec3_copy(up, camera.up);
+    newVec3(camera.front, 0.0f, 0.0f, -1.0f);
+    newVec3(camera.up, 0.0f, 1.0f, 0.0f);
 }
 
 // Set model matrix uniform in vertex shader

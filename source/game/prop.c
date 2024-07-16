@@ -1,6 +1,7 @@
 // Custom modules
 #include <prop.h>
 #include <camera.h>
+#include <collision.h>
 
 Prop* props[MAX_PROPS];
 int active_props = 0;
@@ -77,10 +78,8 @@ void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision)
     active_props++;
 
     // Setting min and max vectors in bbox
-    vec3 boundingBoxMax = { pos[0] + x, pos[1] + y, pos[2] + z };
-    vec3 boundingBoxMin = { pos[0] - x, pos[1] - y, pos[2] - z };
-    memcpy(prop->bbox.max, boundingBoxMax, sizeof(vec3));
-    memcpy(prop->bbox.min, boundingBoxMin, sizeof(vec3));
+    newVec3(prop->bbox.max, pos[0] + x, pos[1] + y, pos[2] + z);
+    newVec3(prop->bbox.min, pos[0] - x, pos[1] - y, pos[2] - z);
 
     // Setting model matrix
     glm_mat4_identity(prop->model);
@@ -94,6 +93,9 @@ void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision)
     glBufferData(GL_ARRAY_BUFFER, PROP_MAX_VERTICES * sizeof(vec3), prop->vertices, GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
     glEnableVertexAttribArray(0);
+
+    // Insertint the prop in octree
+    insertOctreeProp(prop, root);
 
     // Unbinding
     glBindVertexArray(0);

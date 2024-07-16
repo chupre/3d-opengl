@@ -3,7 +3,7 @@
 #include <player.h>
 #include <prop.h>
 
-OctreeNode root;
+OctreeNode* root;
 
 // Checks collision for every prop, return true if there is collision
 bool collisionDetect(vec3 newPos) {
@@ -37,24 +37,28 @@ bool AABBcollision(Bbox a, Bbox b) {
 }
 
 // Returns a new octree node
-OctreeNode newOctree(float xMin, float yMin, float zMin, float xMax, float yMax, float zMax)
-{
+OctreeNode* newOctree(float xMin, float yMin, float zMin, float xMax, float yMax, float zMax) {
     // Initializing the node
-    OctreeNode node;
-    node.nodeRegion.min[0] = xMin;
-    node.nodeRegion.min[1] = yMin;
-    node.nodeRegion.min[2] = zMin;
-    node.nodeRegion.max[0] = xMax;
-    node.nodeRegion.max[1] = yMax;
-    node.nodeRegion.max[2] = zMax;
-    node.props = NULL;
+    OctreeNode* node = (OctreeNode*)malloc(sizeof(OctreeNode));
+    newVec3(node->nodeRegion.min, xMin, yMin, zMin);
+    newVec3(node->nodeRegion.max, xMax, yMax, zMax);
+    node->props = NULL;
     for (int i = 0; i < 8; i++)
-        node.children[i] = NULL;
+        node->children[i] = NULL;
+
+    return node;
+    // than add insertion
+    // than add dbgDrawOctree
+    // than add kill and rebalance
+    // than add traversion in octree
+    // done 
 }
 
 // Recursively inserts a prop in node by dividing the octree
-void insertOctreeProp(Prop* prop, OctreeNode* node)
-{
-    
+void insertOctreeProp(Prop* prop, OctreeNode* node) {
+    for (int i = 0; i < 8; i++) {
+      
+    }
 }
 
+// Draws the borders of an octree

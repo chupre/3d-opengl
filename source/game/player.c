@@ -3,6 +3,7 @@
 
 // Custom modules
 #include <player.h>
+#include <vector.h>
 
 Player player;
 
@@ -14,9 +15,7 @@ void initPlayer() {
     getNewPlayerBbox(player.position, &player.bbox);
 
     // Set in world center
-    player.position[0] = 0.0f;
-    player.position[1] = player.height;
-    player.position[2] = 0.0f; 
+    newVec3(player.position, 0.0f, player.height, 0.0f);
 
     // Set states to default
     player.states.noclip = false;
@@ -29,8 +28,6 @@ void getNewPlayerBbox(vec3 pos, Bbox* b) {
     GLfloat z = pos[2];
 
     // Setting min and max vectors in bbox
-    vec3 bouningBoxMax = { x + player.width, y, z + player.depth };
-    vec3 bouningBoxMin = { x - player.width, y - player.height, z - player.depth };
-    memcpy(b->max, bouningBoxMax, sizeof(vec3));
-    memcpy(b->min, bouningBoxMin, sizeof(vec3));
+    newVec3(b->max, x + player.width, y, z + player.depth);
+    newVec3(b->min, x - player.width, y - player.height, z - player.depth);
 }
