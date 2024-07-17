@@ -1,3 +1,6 @@
+// Ignoring warning about passing mat4 to uniforms
+#pragma GCC diagnostic ignored "-Wincompatible-pointer-types"
+
 // Custom modules
 #include <camera.h>
 #include <player.h>

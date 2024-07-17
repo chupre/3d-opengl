@@ -24,6 +24,7 @@ typedef struct OctreeNode {
   Prop **props;
   Bbox nodeRegion;
   struct OctreeNode* children[8];
+  bool isLeaf;
 } OctreeNode;
 
 extern OctreeNode* root;

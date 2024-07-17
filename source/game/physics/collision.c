@@ -43,6 +43,7 @@ OctreeNode* newOctree(float xMin, float yMin, float zMin, float xMax, float yMax
     newVec3(node->nodeRegion.min, xMin, yMin, zMin);
     newVec3(node->nodeRegion.max, xMax, yMax, zMax);
     node->props = NULL;
+    node->isLeaf = true;
     for (int i = 0; i < 8; i++)
         node->children[i] = NULL;
 
@@ -56,9 +57,7 @@ OctreeNode* newOctree(float xMin, float yMin, float zMin, float xMax, float yMax
 
 // Recursively inserts a prop in node by dividing the octree
 void insertOctreeProp(Prop* prop, OctreeNode* node) {
-    for (int i = 0; i < 8; i++) {
-      
-    }
+    // 1. 
 }
 
 // Draws the borders of an octree
