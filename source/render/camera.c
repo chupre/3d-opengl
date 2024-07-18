@@ -24,8 +24,7 @@ vec3 Z_AXIS = { 0.0f, 0.0f, 1.0f };
 Camera camera;
 
 // Camera initialization
-void initCamera()
-{
+void initCamera() {
     camera.FOV = DEFAULT_FOV;
     camera.speedMultiplier = 1.0f;
 
@@ -37,16 +36,14 @@ void initCamera()
 }
 
 // Set model matrix uniform in vertex shader
-void setModelUniform(mat4 model)
-{
+void setModelUniform(mat4 model) {
     // Setting model uniform
     int modelLoc = glGetUniformLocation(shaderProgram, "model");
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, model);
 }
 
 // Set view matrix uniform in vertex shader
-void setViewUniform()
-{
+void setViewUniform() {
     // Creating view matrix
     mat4 view;
     vec3 temp;
@@ -59,8 +56,7 @@ void setViewUniform()
 }
 
 // Set projection matrix uniform in vertex shader
-void setProjectionUniform()
-{
+void setProjectionUniform() {
     // Creating projection matrix
     mat4 projection;
     glm_mat4_identity(projection);
@@ -72,8 +68,7 @@ void setProjectionUniform()
 }
 
 // Updates camera target position
-void moveCameraTarget(enum direction dir)
-{
+void moveCameraTarget(enum direction dir) {
     // Speeds multiplies by deltatime to make it not fps-related
     float cameraSpeed = DEFAULT_CAMERA_SPEED * deltaTimeTick * camera.speedMultiplier;
     vec3 temp;
@@ -125,14 +120,11 @@ void moveCameraTarget(enum direction dir)
 
     // Noclip
     if (!player.states.noclip)
-    {
         camera.targetPos[1] = 1.1f; 
-    }
 }
 
 // Updating camera position depending on mouse input
-void applyMouseInput()
-{
+void applyMouseInput() {
     // Calculating direction vector
     vec3 direction;
     direction[0] = cos(glm_rad(yaw)) * cos(glm_rad(pitch));

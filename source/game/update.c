@@ -6,7 +6,7 @@
 #include <prop.h>
 
 // Root scene size - World size
-GLfloat worldSize = 2000.0f;
+GLfloat worldSize = 1000.0f;
 
 // Stores information about which sides camera must move each updateCameraPosition call.
 // Indices are { FORWARD, BACKWARDS, RIGHT, LEFT }.
@@ -28,8 +28,7 @@ GLdouble timer = 0.0f;
 int updates = 0;
 
 // Updates delta time to make stuff not fps-related
-GLvoid updateGameTime()
-{
+GLvoid updateGameTime() {
     currentFrame = glfwGetTime();
     deltaTime = currentFrame - lastFrame;
     deltaTimeTick += deltaTime / tick;
@@ -37,8 +36,7 @@ GLvoid updateGameTime()
 }
 
 // Updates camera position each tick
-GLvoid updateCameraPosition()
-{
+GLvoid updateCameraPosition() {
     // Moves camera depends on directions from user input
     if (cameraMovement[FORWARD])
     {
@@ -65,8 +63,7 @@ GLvoid updateCameraPosition()
 }
 
 // Updates game state every tick
-GLvoid update()
-{
+GLvoid update() {
     updateCameraPosition();
     updates++;
 }

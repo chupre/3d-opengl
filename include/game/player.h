@@ -9,15 +9,13 @@
 #include <bbox.h>
 
 // Struct for storing all kinds of temporary states player could be in.
-typedef struct
-{
+typedef struct {
     bool noclip;
 } playerState;
 
 // Position is {x,y,z}-vector relative to world center.
 // Height represents camera tallness.
-typedef struct
-{
+typedef struct {
     vec3 position;
     Bbox bbox;
     GLfloat height, width, depth;

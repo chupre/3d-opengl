@@ -13,9 +13,7 @@ char* getShaderContent(const GLchar* fileName)
     shaderFile = fopen(fileName, "r");
 
     if (shaderFile == NULL)
-    {
         printf("Failed to open %s\n", fileName);
-    }
 
     fseek(shaderFile, 0, SEEK_END);
     size = ftell(shaderFile);

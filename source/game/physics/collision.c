@@ -45,8 +45,10 @@ OctreeNode* octreeCreate(float xMin, float yMin, float zMin, float xMax, float y
     OctreeNode* node = (OctreeNode*)malloc(sizeof(OctreeNode));
     newVec3(node->nodeRegion.min, xMin, yMin, zMin);
     newVec3(node->nodeRegion.max, xMax, yMax, zMax);
-    node->prop = NULL;
+    node->activeProps = 0;
     node->isLeaf = true;
+    node->props = NULL;
+    node->depth = 0;
     for (int i = 0; i < 8; i++)
         node->children[i] = NULL;
 
@@ -95,11 +97,32 @@ void octreeSubdivide(OctreeNode* node) {
 
     node->children[BottomLeftBack]   = octreeCreate(nodeCenter[0] - nodeSize, nodeCenter[1] - nodeSize, nodeCenter[2],
                                                     nodeCenter[0], nodeCenter[1], nodeCenter[2] + nodeSize);
+
+    node->isLeaf = false;
+    for (int i = 0; i < 8; i++)
+        node->children[i]->depth = node->depth + 1;
 }
 
 // Recursively inserts a prop in node by dividing the octree
 void octreeInsertProp(Prop* prop, OctreeNode* node) {
-
+    for (int i = 0; i < 8; i++) {
+        if (node->children[i] != NULL && AABBcollision(node->children[i]->nodeRegion, prop->bbox)) {
+            if (!node->children[i]->isLeaf) {
+                octreeInsertProp(prop, node->children[i]);
+            } else if (node->children[i]->activeProps < NODE_MAX_PROPS || node->children[i]->depth == NODE_MAX_DEPTH) {
+                node->children[i]->activeProps++;
+                node->children[i]->props = realloc(node->children[i]->props, active_props * sizeof(Prop*));
+                node->children[i]->props[node->children[i]->activeProps - 1] = prop;
+            } else {
+                octreeSubdivide(node->children[i]);
+                for (int i = 0; i < node->children[i]->activeProps; i++) 
+                    octreeInsertProp(node->children[i]->props[i], node->children[i]);
+                octreeInsertProp(prop, node->children[i]);
+                node->children[i]->props = NULL;
+                node->children[i]->activeProps = 0;
+            }
+        }
+    }
 }
 
 // Recursively draws the border lines of an octree

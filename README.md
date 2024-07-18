@@ -14,10 +14,10 @@
 🔴 Add octree optimization.\
 🔴 Implement textures and skybox.\
 🔴 Add basic lightning.\
+🔴 Add text rendering (FPS counter).\
+🔴 Add model loader.\
 🔴 Fix movement.\
 🔴 Add gravity (for both player and props) and jumping on space, adjust noclip (separate fly and noclip).\
 🔴 Add collision response for props (add basic physics).\
-🔴 Add text rendering (FPS counter).\
-🔴 Add model loader.\
 🔴 Add raycasting (camera frustum intersecting with octree).\
 🔴 Add GUI for settings.

@@ -19,9 +19,14 @@
 #define BottomRightBack 6
 #define BottomLeftBack 7
 
+#define NODE_MAX_PROPS 1
+#define NODE_MAX_DEPTH 128
+
 // Octree struct implemented to optimize collision
 typedef struct OctreeNode {
-  Prop *prop;
+  Prop **props;
+  int activeProps;
+  int depth;
   Bbox nodeRegion;
   struct OctreeNode* children[8];
   bool isLeaf;

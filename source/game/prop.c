@@ -7,8 +7,7 @@ Prop* props[MAX_PROPS];
 int active_props = 0;
 
 // Creates prop VBO and VAO and sets prop's fields
-void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision)
-{
+void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision) {
     // Setting pointer in props array
     for (int i = 0; i < MAX_PROPS; i++)
     {
@@ -103,21 +102,15 @@ void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision)
 }
 
 // Null the prop array
-void initPropArray()
-{
+void initPropArray() {
     for (int i = 0; i < MAX_PROPS; i++)
-    {
         props[i] = NULL;
-    }
 }
 
 // Freeing memory for prop
-void killProp(Prop* prop)
-{
-    for (int i = 0; i < MAX_PROPS; i++)
-    {
-        if (props[i] == prop)
-        {
+void killProp(Prop* prop) {
+    for (int i = 0; i < MAX_PROPS; i++) {
+        if (props[i] == prop) {
             props[i] = NULL;    
             active_props--;
             return;

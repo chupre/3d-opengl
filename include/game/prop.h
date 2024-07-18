@@ -18,8 +18,7 @@
 extern int active_props;
 
 // Prop struct
-typedef struct
-{
+typedef struct {
     GLuint VBO, VAO;
     bool hasCollision;
     vec3 offset;
