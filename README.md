@@ -19,5 +19,5 @@
 🔴 Add collision response for props (add basic physics).\
 🔴 Add text rendering (FPS counter).\
 🔴 Add model loader.\
-🔴 Add GUI for settings.\
-🔴 Add raycasting.
+🔴 Add raycasting (camera frustum intersecting with octree).\
+🔴 Add GUI for settings.

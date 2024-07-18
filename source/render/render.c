@@ -8,6 +8,7 @@
 #include <camera.h>
 #include <update.h>
 #include <player.h>
+#include <collision.h>
 
 // Is app paused. Initially set to false.
 bool isPaused = false;
@@ -18,17 +19,14 @@ bool isRunning = true;
 int frames = 0;
 
 // Pauses (unpauses) the game and deattaches (attaches) the mouse cursor
-GLvoid togglePause()
-{
+GLvoid togglePause() {
     // Unpauses and returns cursor in the middle
-    if (isPaused)
-    {
+    if (isPaused) {
         isPaused = false;
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     }
     // Pauses and makes cursor visible and not attached to the middle of screen
-    else
-    {
+    else {
         firstMouseInput = true; // Prevents camera following new cursor position after pause
         isPaused = true;
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
@@ -36,8 +34,7 @@ GLvoid togglePause()
 } 
 
 // Main render function
-GLvoid render()
-{
+GLvoid render() {
     glClearColor(0.529f, 0.808f, 0.922f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -47,10 +44,8 @@ GLvoid render()
     glm_vec3_lerp(camera.currPos, camera.targetPos, deltaTime * INTERPOLATION_MULTIPLIER, camera.currPos);
     
     // Rendering evry prop
-    for (int i = 0; i < MAX_PROPS; i++)
-    {
-        if (props[i] != NULL)
-        {
+    for (int i = 0; i < MAX_PROPS; i++) {
+        if (props[i] != NULL) {
             setModelUniform(props[i]->model);
 
             glBindVertexArray(props[i]->VAO);
@@ -58,14 +53,16 @@ GLvoid render()
         }
     }
 
+    // Debug: recursively draw octree border lines
+    if (dbgRenderOctree)
+        octreeDraw(root);
+
     frames++;
 }
 
 // Prints FPS every second
-void showFPS()
-{
-    if (glfwGetTime() - timer > 1)
-    {
+void showFPS() {
+    if (glfwGetTime() - timer > 1) {
         printf("FPS: %d, Updates: %d\n", frames, updates);
         timer += 1;
         frames = 0;

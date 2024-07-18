@@ -95,7 +95,7 @@ void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision)
     glEnableVertexAttribArray(0);
 
     // Insertint the prop in octree
-    insertOctreeProp(prop, root);
+    octreeInsertProp(prop, root);
 
     // Unbinding
     glBindVertexArray(0);

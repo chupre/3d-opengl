@@ -21,15 +21,19 @@
 
 // Octree struct implemented to optimize collision
 typedef struct OctreeNode {
-  Prop **props;
+  Prop *prop;
   Bbox nodeRegion;
   struct OctreeNode* children[8];
   bool isLeaf;
 } OctreeNode;
 
 extern OctreeNode* root;
+extern bool octreeCreated;
+extern bool dbgRenderOctree;
 
 bool collisionDetect(vec3 newPos);
 bool AABBcollision(Bbox a, Bbox b);
-OctreeNode* newOctree(float xMin, float yMin, float zMin, float xMax, float yMax, float zMax);
-void insertOctreeProp(Prop* prop, OctreeNode* node);
+OctreeNode* octreeCreate(float xMin, float yMin, float zMin, float xMax, float yMax, float zMax);
+void octreeSubdivide(OctreeNode* node);
+void octreeInsertProp(Prop* prop, OctreeNode* node);
+void octreeDraw(OctreeNode* node);

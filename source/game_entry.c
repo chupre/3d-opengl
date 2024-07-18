@@ -23,7 +23,7 @@ int main(int argc, char** argv)
 
     // Preinitializing prop pointers array and octree
     initPropArray();
-    root = newOctree(-worldSize, -worldSize, -worldSize, worldSize, worldSize, worldSize);
+    root = octreeCreate(-worldSize, -worldSize, -worldSize, worldSize, worldSize, worldSize);
 
     // Creating test objects
     vec3 planeOffset = {50.0f, 0.0f, 50.0f};
@@ -55,11 +55,6 @@ int main(int argc, char** argv)
     vec3 test5Pos = { 0.0f, 10.0f, 5.0f };
     Prop test5;
     newProp(&test5, test5Pos, test5Offset, true);
-
-    vec3 test6Offset = {4.0f, 15.0f, 2000.0f };
-    vec3 test6Pos = { -60.0f, 0.0f, 5.0f };
-    Prop test6;
-    newProp(&test6, test6Pos, test6Offset, true);
 
     // Player initialization
     initPlayer();
