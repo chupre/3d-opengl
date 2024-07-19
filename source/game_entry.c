@@ -20,9 +20,8 @@ int main(int argc, char** argv) {
     // Generate shader program
     setShader();
 
-    // Preinitializing prop pointers array and octree
+    // Preinitializing prop pointers array
     initPropArray();
-    root = octreeCreate(-worldSize, -worldSize, -worldSize, worldSize, worldSize, worldSize);
 
     vec3 planeOffset = {50.0f, 0.0f, 50.0f};
     vec3 planePos = { 0.0f, 0.0f, 0.0f };

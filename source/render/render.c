@@ -44,13 +44,11 @@ GLvoid render() {
     glm_vec3_lerp(camera.currPos, camera.targetPos, deltaTime * INTERPOLATION_MULTIPLIER, camera.currPos);
     
     // Rendering evry prop
-    for (int i = 0; i < MAX_PROPS; i++) {
-        if (props[i] != NULL) {
-            setModelUniform(props[i]->model);
+    for (int i = 0; i < active_props; i++) {
+        setModelUniform(props[i]->model);
 
-            glBindVertexArray(props[i]->VAO);
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-        }
+        glBindVertexArray(props[i]->VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
     }
 
     // Debug: recursively draw octree border lines

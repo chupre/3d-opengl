@@ -4,8 +4,10 @@
 // Custom modules
 #include <player.h>
 #include <vector.h>
+#include <prop.h>
 
 Player player;
+Prop playerProp;
 
 void initPlayer() {
     player.height = 1.0f;
@@ -19,6 +21,10 @@ void initPlayer() {
 
     // Set states to default
     player.states.noclip = false;
+    
+    // Initializing standalone player prop for inserting it in octree
+    playerProp.bbox = player.bbox;
+    playerProp.isPlayer = true;
 }
 
 // Stores in dest new player bounding box related to pos vector

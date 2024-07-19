@@ -1,7 +1,7 @@
 // Custom modules
 #include <prop.h>
 #include <camera.h>
-#include <collision.h>
+#include <vector.h>
 
 Prop* props[MAX_PROPS];
 int active_props = 0;
@@ -74,6 +74,9 @@ void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision) {
     // Setting collision
     prop->hasCollision = hasCollision;
 
+    // Ensring the prop is not a player prop
+    prop->isPlayer = false;
+
     active_props++;
 
     // Setting min and max vectors in bbox
@@ -93,9 +96,6 @@ void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision) {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
     glEnableVertexAttribArray(0);
 
-    // Insertint the prop in octree
-    octreeInsertProp(prop, root);
-
     // Unbinding
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -113,6 +113,14 @@ void killProp(Prop* prop) {
         if (props[i] == prop) {
             props[i] = NULL;    
             active_props--;
+
+            i++;
+
+            while (i < MAX_PROPS && props[i] != NULL) {
+                props[i - 1] = props[i];
+                i++;
+            }
+
             return;
         }
     }

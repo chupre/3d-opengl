@@ -4,6 +4,7 @@
 #include <update.h>
 #include <render.h>
 #include <prop.h>
+#include <collision.h>
 
 // Root scene size - World size
 GLfloat worldSize = 1000.0f;
@@ -58,6 +59,9 @@ GLvoid updateCameraPosition() {
     // Copy camera pos to player pos
     glm_vec3_copy(camera.currPos, player.position);
 
+    // Updates player bbox for player prop in octree
+    getNewPlayerBbox(player.position, &playerProp.bbox);
+
     // Reset speedMultiplier to default.
     camera.speedMultiplier = 1.0f;
 }
@@ -65,5 +69,6 @@ GLvoid updateCameraPosition() {
 // Updates game state every tick
 GLvoid update() {
     updateCameraPosition();
+    octreeUpdate(root);
     updates++;
 }

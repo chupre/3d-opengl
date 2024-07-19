@@ -26,6 +26,7 @@ typedef struct {
     vec3 vertices[PROP_MAX_VERTICES];
     Bbox bbox;
     mat4 model;
+    bool isPlayer;
 } Prop;
 
 extern Prop* props[MAX_PROPS];

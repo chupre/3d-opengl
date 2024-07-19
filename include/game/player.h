@@ -7,6 +7,7 @@
 
  // Custom modules
 #include <bbox.h>
+#include <prop.h>
 
 // Struct for storing all kinds of temporary states player could be in.
 typedef struct {
@@ -23,6 +24,7 @@ typedef struct {
 } Player;
 
 extern Player player;
+extern Prop playerProp;
 
 void initPlayer();
 void getNewPlayerBbox(vec3 pos, Bbox* b);

@@ -42,4 +42,5 @@ OctreeNode* octreeCreate(float xMin, float yMin, float zMin, float xMax, float y
 void octreeSubdivide(OctreeNode* node);
 void octreeInsertProp(Prop* prop, OctreeNode* node);
 void octreeDraw(OctreeNode* node);
-void octreeUpdates(OctreeNode* node);
+void octreeKill(OctreeNode* node);
+void octreeUpdate(OctreeNode* node);

@@ -12,6 +12,7 @@
 🟢 Add MSAA.\
 🟢 Add simple player collision.\
 🔴 Add octree optimization.\
+🔴 Rename props to objects.\
 🔴 Implement textures and skybox.\
 🔴 Add basic lightning.\
 🔴 Add text rendering (FPS counter).\
