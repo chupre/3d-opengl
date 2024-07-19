@@ -47,7 +47,7 @@ GLvoid setWindow() {
     glEnable(GL_MULTISAMPLE);
 
     // Disable vsync
-    glfwSwapInterval(0);
+    glfwSwapInterval(1);
 
     //Setting icon for window
     GLint iconWidth, iconHeight;

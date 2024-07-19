@@ -80,7 +80,7 @@ void moveCameraTarget(enum direction dir) {
         glm_vec3_scale(camera.front, cameraSpeed, temp);
         glm_vec3_add(camera.targetPos, temp, newPos);
 
-        if (!collisionDetect(newPos))
+        if (!playerCollisionDetect(newPos))
             glm_vec3_copy(newPos, camera.targetPos);
     }
 
@@ -90,7 +90,7 @@ void moveCameraTarget(enum direction dir) {
         glm_vec3_scale(camera.front, cameraSpeed, temp);
         glm_vec3_sub(camera.targetPos, temp, newPos);
 
-        if (!collisionDetect(newPos))
+        if (!playerCollisionDetect(newPos))
             glm_vec3_copy(newPos, camera.targetPos);        
     }
 
@@ -102,7 +102,7 @@ void moveCameraTarget(enum direction dir) {
         glm_vec3_scale(temp, cameraSpeed, temp);
         glm_vec3_add(camera.targetPos, temp, newPos);
 
-        if (!collisionDetect(newPos))
+        if (!playerCollisionDetect(newPos))
             glm_vec3_copy(newPos, camera.targetPos);        
     }
 
@@ -114,7 +114,7 @@ void moveCameraTarget(enum direction dir) {
         glm_vec3_scale(temp, cameraSpeed, temp);
         glm_vec3_sub(camera.targetPos, temp, newPos);
 
-        if (!collisionDetect(newPos))
+        if (!playerCollisionDetect(newPos))
             glm_vec3_copy(newPos, camera.targetPos);        
     }
 

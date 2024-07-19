@@ -8,8 +8,9 @@ OctreeNode* root;
 bool octreeCreated = false;
 bool dbgRenderOctree = false;
 
+
 // Checks collision for every prop, return true if there is collision
-bool collisionDetect(vec3 newPos) {
+bool playerCollisionDetect(vec3 newPos) {
     if (player.states.noclip)
         return false;
 
@@ -59,10 +60,10 @@ OctreeNode* octreeCreate(float xMin, float yMin, float zMin, float xMax, float y
 
     return node;
 
-    // than add insertion
-    // than add kill and rebalance
-    // than add traversion in octree
-    // done 
+    // add octree update
+    // add player to octree
+    // add prop kill
+    // add octree traversion in collision detect
 }
 
 // Subdivides the node in 8 octants
@@ -111,7 +112,7 @@ void octreeInsertProp(Prop* prop, OctreeNode* node) {
                 octreeInsertProp(prop, node->children[i]);
             } else if (node->children[i]->activeProps < NODE_MAX_PROPS || node->children[i]->depth == NODE_MAX_DEPTH) {
                 node->children[i]->activeProps++;
-                node->children[i]->props = realloc(node->children[i]->props, active_props * sizeof(Prop*));
+                node->children[i]->props = realloc(node->children[i]->props, node->children[i]->activeProps * sizeof(Prop*));
                 node->children[i]->props[node->children[i]->activeProps - 1] = prop;
             } else {
                 octreeSubdivide(node->children[i]);
@@ -125,7 +126,7 @@ void octreeInsertProp(Prop* prop, OctreeNode* node) {
     }
 }
 
-// Recursively draws the border lines of an octree
+// Recursively draws the border lines of an octree. Not optimal
 void octreeDraw(OctreeNode* node) {
     vec3 nodeCenter = { (node->nodeRegion.max[0] + node->nodeRegion.min[0]) / 2.0f,
                         (node->nodeRegion.max[1] + node->nodeRegion.min[1]) / 2.0f,
@@ -213,3 +214,8 @@ void octreeDraw(OctreeNode* node) {
         if (node->children[i] != NULL)
             octreeDraw(node->children[i]);
 }
+
+// Updates octree recusrively each update tick
+ void octreeUpdate(OctreeNode* node) {
+    
+ }

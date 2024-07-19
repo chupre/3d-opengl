@@ -22,5 +22,9 @@ set(SOURCES
 # Add executable target
 add_executable(3D-OpenGL ${SOURCES} external/glad/glad.c)
 
-# Optionally link libraries
-target_link_libraries(3D-OpenGL glfw m)
+# Link libraries
+if (WIN32)
+    target_link_libraries(3D-OpenGL ${CMAKE_CURRENT_SOURCE_DIR}/external/GLFW/glfw3.lib)
+else()
+    target_link_libraries(3D-OpenGL glfw m)
+endif()

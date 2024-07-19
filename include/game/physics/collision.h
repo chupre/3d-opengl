@@ -20,7 +20,7 @@
 #define BottomLeftBack 7
 
 #define NODE_MAX_PROPS 1
-#define NODE_MAX_DEPTH 128
+#define NODE_MAX_DEPTH 64
 
 // Octree struct implemented to optimize collision
 typedef struct OctreeNode {
@@ -36,9 +36,10 @@ extern OctreeNode* root;
 extern bool octreeCreated;
 extern bool dbgRenderOctree;
 
-bool collisionDetect(vec3 newPos);
+bool playerCollisionDetect(vec3 newPos);
 bool AABBcollision(Bbox a, Bbox b);
 OctreeNode* octreeCreate(float xMin, float yMin, float zMin, float xMax, float yMax, float zMax);
 void octreeSubdivide(OctreeNode* node);
 void octreeInsertProp(Prop* prop, OctreeNode* node);
 void octreeDraw(OctreeNode* node);
+void octreeUpdates(OctreeNode* node);
