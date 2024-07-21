@@ -9,7 +9,7 @@
 #include <glad/glad.h>
 #include <cglm/cglm.h>
 
-// Custom modules MAX_PROPS; i
+// Custom modules MAX_PROPS;
 #include <bbox.h>
 
 #define PROP_MAX_VERTICES 64

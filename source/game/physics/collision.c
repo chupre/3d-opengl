@@ -2,7 +2,7 @@
 #include <camera.h>
 #include <collision.h>
 #include <player.h>
-#include <prop.h>
+#include <vector.h>
 #include <update.h>
 
 OctreeNode *root;
@@ -14,16 +14,14 @@ bool playerCollisionDetect(vec3 newPos) {
   if (player.states.noclip)
     return false;
 
-  Bbox newPlayerBbox;
-  getNewPlayerBbox(newPos, &newPlayerBbox);
+  Bbox oldPlayerBbox = playerProp.bbox;
+  getNewPlayerBbox(newPos, &playerProp.bbox);
 
- // DONT'T FORGET ABOUT PLAYER PROP
-  for (int i = 0; i < active_props; i++) {
-    if (props[i] && props[i]->hasCollision &&
-        AABBcollision(newPlayerBbox, props[i]->bbox))
-      return true;
-  }
+  octreeUpdate(root);
+  
+  // check for collision in the player nodes got from prop struct
 
+  playerProp.bbox = oldPlayerBbox;
   return false;
 }
 
@@ -65,8 +63,7 @@ void octreeSubdivide(OctreeNode *node) {
   // Setting vector for center of node cube
   vec3 nodeCenter = {(node->nodeRegion.max[0] + node->nodeRegion.min[0]) / 2.0f,
                      (node->nodeRegion.max[1] + node->nodeRegion.min[1]) / 2.0f,
-                     (node->nodeRegion.max[2] + node->nodeRegion.min[2]) /
-                         2.0f};
+                     (node->nodeRegion.max[2] + node->nodeRegion.min[2]) / 2.0f};
 
   int nodeSize = node->nodeRegion.max[0] - nodeCenter[0];
 
@@ -118,7 +115,7 @@ void octreeInsertProp(Prop *prop, OctreeNode *node) {
         node->children[i]->props = realloc(node->children[i]->props, node->children[i]->activeProps * sizeof(Prop *));
         node->children[i]->props[node->children[i]->activeProps - 1] = prop;
       } else {
-        octreeSubdivide(node->children[i]);
+        octreeSubdivide(node->children[i]); 
         for (int i = 0; i < node->children[i]->activeProps; i++)
           octreeInsertProp(node->children[i]->props[i], node->children[i]);
         octreeInsertProp(prop, node->children[i]);

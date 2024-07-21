@@ -23,10 +23,10 @@ int main(int argc, char** argv) {
     // Preinitializing prop pointers array
     initPropArray();
 
-    vec3 planeOffset = {50.0f, 0.0f, 50.0f};
-    vec3 planePos = { 0.0f, 0.0f, 0.0f };
-    Prop plane;
-    newProp(&plane, planePos, planeOffset, true);
+    // vec3 planeOffset = {50.0f, 0.0f, 50.0f};
+    // vec3 planePos = { 0.0f, 0.0f, 0.0f };
+    // Prop plane;
+    // newProp(&plane, planePos, planeOffset, true);
 
     vec3 test1Offset = {2.0f, 5.0f, 2.0f };
     vec3 test1Pos = { 10.0f, 5.0f, 0.0f };
@@ -52,6 +52,8 @@ int main(int argc, char** argv) {
     vec3 test5Pos = { 0.0f, 10.0f, 5.0f };
     Prop test5;
     newProp(&test5, test5Pos, test5Offset, true);
+
+    octreeUpdate(root);
 
     // Player initialization
     initPlayer();

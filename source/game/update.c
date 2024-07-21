@@ -69,6 +69,5 @@ GLvoid updateCameraPosition() {
 // Updates game state every tick
 GLvoid update() {
     updateCameraPosition();
-    octreeUpdate(root);
     updates++;
 }

@@ -8,15 +8,22 @@ int active_props = 0;
 
 // Creates prop VBO and VAO and sets prop's fields
 void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision) {
+    bool propCreated = false;
+
     // Setting pointer in props array
     for (int i = 0; i < MAX_PROPS; i++)
     {
         if (props[i] == NULL)
         {
             props[i] = prop;
+            propCreated = true;
             break;
         }
     }
+
+    // Check if there was a free space for the prop
+    if (!propCreated)
+        return;
 
     // Setting vertices in prop
     GLfloat x = offset[0];

@@ -7,7 +7,6 @@
 // Custom modules
 #include <bbox.h>
 #include <prop.h>
-#include <vector.h>
 
 // Octree octants
 #define TopLeftFront 0
@@ -31,6 +30,7 @@ typedef struct OctreeNode {
   struct OctreeNode* children[8];
   bool isLeaf;
 } OctreeNode;
+
 
 extern OctreeNode* root;
 extern bool octreeCreated;
