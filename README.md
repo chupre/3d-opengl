@@ -11,7 +11,7 @@
 🟢 Add different prop types.\
 🟢 Add MSAA.\
 🟢 Add simple player collision.\
-🔴 Add octree optimization.\
+🟢 Add octree optimization.\
 🔴 Rename props to objects.\
 🔴 Implement textures and skybox.\
 🔴 Add basic lightning.\
@@ -20,5 +20,6 @@
 🔴 Fix movement.\
 🔴 Add gravity (for both player and props) and jumping on space, adjust noclip (separate fly and noclip).\
 🔴 Add collision response for props (add basic physics).\
+🔴 Optimize octree update.\
 🔴 Add raycasting (camera frustum intersecting with octree).\
 🔴 Add GUI for settings.

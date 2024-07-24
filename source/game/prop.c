@@ -85,9 +85,6 @@ void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision) {
     // Setting collision
     prop->hasCollision = hasCollision;
 
-    // Ensring the prop is not a player prop
-    prop->isPlayer = false;
-
     active_props++;
 
     // Setting min and max vectors in bbox

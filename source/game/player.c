@@ -24,7 +24,6 @@ void initPlayer() {
     
     // Initializing standalone player prop for inserting it in octree
     playerProp.bbox = player.bbox;
-    playerProp.isPlayer = true;
 }
 
 // Stores in dest new player bounding box related to pos vector

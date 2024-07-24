@@ -18,7 +18,8 @@ bool playerCollisionDetect(vec3 newPos) {
 
   for (int i = 0; i < playerProp.nodesCount; i++)
     for (int j = 0; j < playerProp.nodes[i]->propsCount; j++) {
-      if (playerProp.nodes[i]->props[j]->hasCollision && 
+      if (playerProp.nodes[i]->props[j]->hasCollision &&
+          &playerProp != playerProp.nodes[i]->props[j] && 
           AABBcollision(playerProp.bbox, playerProp.nodes[i]->props[j]->bbox))
         return true;
     }

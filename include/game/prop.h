@@ -29,7 +29,6 @@ struct Prop {
     vec3 vertices[PROP_MAX_VERTICES];
     Bbox bbox;
     mat4 model;
-    bool isPlayer;
     bool hasCollision;
     int nodesCount;
     OctreeNode* nodes[PROP_MAX_NODES];
