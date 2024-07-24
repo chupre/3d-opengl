@@ -78,6 +78,10 @@ void newProp(Prop* prop, vec3 pos, vec3 offset, bool hasCollision) {
     memcpy(prop->offset, offset, sizeof(vec3));
     memcpy(prop->pos, pos, sizeof(vec3));
 
+    for (int i = 0; i < PROP_MAX_NODES; i++)
+        prop->nodes[i] = NULL;
+    prop->nodesCount = 0;
+
     // Setting collision
     prop->hasCollision = hasCollision;
 
@@ -118,6 +122,7 @@ void initPropArray() {
 void killProp(Prop* prop) {
     for (int i = 0; i < MAX_PROPS; i++) {
         if (props[i] == prop) {
+            free(prop->nodes);
             props[i] = NULL;    
             active_props--;
 

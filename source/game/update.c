@@ -40,21 +40,16 @@ GLvoid updateGameTime() {
 GLvoid updateCameraPosition() {
     // Moves camera depends on directions from user input
     if (cameraMovement[FORWARD])
-    {
         moveCameraTarget(FORWARD);
-    }
+
     if (cameraMovement[BACKWARDS])
-    {
         moveCameraTarget(BACKWARDS);
-    }
+
     if (cameraMovement[LEFT])
-    {
         moveCameraTarget(LEFT);
-    }
+
     if (cameraMovement[RIGHT])
-    {
         moveCameraTarget(RIGHT);
-    }
 
     // Copy camera pos to player pos
     glm_vec3_copy(camera.currPos, player.position);

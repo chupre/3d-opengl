@@ -17,6 +17,7 @@ set(SOURCES
     source/game/prop.c
     source/game/physics/collision.c
     source/game/vector.c
+    source/game/octree.c
 )
 
 # Add executable target

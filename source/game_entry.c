@@ -23,10 +23,10 @@ int main(int argc, char** argv) {
     // Preinitializing prop pointers array
     initPropArray();
 
-    // vec3 planeOffset = {50.0f, 0.0f, 50.0f};
-    // vec3 planePos = { 0.0f, 0.0f, 0.0f };
-    // Prop plane;
-    // newProp(&plane, planePos, planeOffset, true);
+    vec3 planeOffset = {50.0f, 0.0f, 50.0f};
+    vec3 planePos = { 0.0f, 0.0f, 0.0f };
+    Prop plane;
+    newProp(&plane, planePos, planeOffset, true);
 
     vec3 test1Offset = {2.0f, 5.0f, 2.0f };
     vec3 test1Pos = { 10.0f, 5.0f, 0.0f };
@@ -74,11 +74,12 @@ int main(int argc, char** argv) {
 
         if (!isPaused) {
             while (deltaTimeTick >= 1.0) {
-            update();
-            deltaTimeTick--;
+                update();
+                deltaTimeTick--;
             }
         }
-
+// make a bind for placing objects
+// think about search algorithm
         render();
 
         showFPS();

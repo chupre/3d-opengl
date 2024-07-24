@@ -7,7 +7,7 @@
 #include <cglm/cglm.h>
 
 #define TICK_COUNT 60.0
-#define INTERPOLATION_MULTIPLIER 5.0f
+#define INTERPOLATION_MULTIPLIER 10.0f
 
 // Stores information about which sides camera must move each updateCameraPosition call.
 // Indices are { FORWARD, BACKWARDS, RIGHT, LEFT }.

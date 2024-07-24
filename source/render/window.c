@@ -96,6 +96,13 @@ GLvoid keyCallback(GLFWwindow* window, int key, int scancode, int action, int mo
             player.states.noclip = !player.states.noclip;
             camera.targetPos[1] = 1.0f;
         }
+
+        // Placing cube
+        if (key == GLFW_KEY_F && action == GLFW_PRESS) {
+            vec3 cubeOffset = {5.0f, 5.0f, 5.0f };
+            Prop* cube = malloc(sizeof(Prop));
+            newProp(cube, player.position, cubeOffset, true);
+        }
 }
 
 // Callback for processing mouse input
