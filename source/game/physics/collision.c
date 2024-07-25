@@ -1,12 +1,9 @@
 // Custom modules
-#include <camera.h>
 #include <collision.h>
 #include <player.h>
-#include <vector.h>
-#include <update.h>
 #include <octree.h>
 
-// Checks collision for every prop, return true if there is collision
+// Checks collision for every prop in the player node, return true if there is collision
 bool playerCollisionDetect(vec3 newPos) {
   if (player.states.noclip)
     return false;

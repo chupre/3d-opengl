@@ -7,7 +7,6 @@
 #include <shader.h>
 #include <window.h>
 #include <update.h>
-#include <render.h>
 #include <collision.h>
 #include <vector.h>
 

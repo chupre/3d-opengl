@@ -16,14 +16,5 @@ extern GLFWwindow* window;
 extern GLint screenWidth;
 extern GLint screenHeight;
 
-// Cursor position centered in middle
-extern GLfloat lastCursorPosX;
-extern GLfloat lastCursorPosY;
-
-extern bool firstMouseInput;
-
 GLvoid setWindow();
-GLvoid keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
-GLvoid mouseCallback(GLFWwindow* window, double xpos, double ypos);
-GLvoid scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 GLvoid quit();

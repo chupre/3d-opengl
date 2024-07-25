@@ -5,7 +5,7 @@
 🟢 Create camera struct.\
 🟢 Create player struct.\
 🟢 Separate headers with .c files.\
-🟢 Reogranised CMakeLists.\
+🟢 Reogranise CMakeLists.\
 🟢 Add render and update functions.\
 🟢 Move camera movement to update.\
 🟢 Add different prop types.\

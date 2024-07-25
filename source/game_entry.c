@@ -8,7 +8,7 @@
 #include <update.h>
 #include <render.h>
 #include <camera.h>
-#include <keyboard_input.h>
+#include <input.h>
 #include <window.h>
 #include <prop.h>
 #include <collision.h>

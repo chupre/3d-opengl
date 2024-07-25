@@ -1,5 +1,6 @@
 // Standars includes
 #include <stdbool.h>
+#include <stdio.h>
 
 // External
 #include <glad/glad.h>

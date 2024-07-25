@@ -1,14 +1,11 @@
-// Standard includes
-#include <stdio.h>
-
 // Custom modules
 #include <render.h>
 #include <window.h>
 #include <prop.h>
 #include <camera.h>
 #include <update.h>
-#include <player.h>
-#include <collision.h>
+#include <octree.h>
+#include <input.h>
 
 // Is app paused. Initially set to false.
 bool isPaused = false;

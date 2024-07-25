@@ -1,10 +1,7 @@
 // Custom modules
+#include <update.h>
 #include <camera.h>
 #include <player.h>
-#include <update.h>
-#include <render.h>
-#include <prop.h>
-#include <collision.h>
 
 // Root scene size - World size
 GLfloat worldSize = 1000.0f;

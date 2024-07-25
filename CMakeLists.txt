@@ -12,7 +12,7 @@ set(SOURCES
     source/game/update.c
     source/render/render.c
     source/render/camera.c
-    source/render/keyboard_input.c
+    source/render/input.c
     source/render/window.c
     source/game/prop.c
     source/game/physics/collision.c
