@@ -12,13 +12,13 @@
 🟢 Add MSAA.\
 🟢 Add simple player collision.\
 🟢 Add octree optimization.\
-🔴 Rename props to objects.\
+🟢 Rename props to objects.\
 🔴 Implement textures and skybox.\
 🔴 Add basic lightning.\
 🔴 Add text rendering (FPS counter).\
 🔴 Add model loader.\
 🔴 Fix movement.\
-🔴 Add gravity (for both player and props) and jumping on space, adjust noclip (separate fly and noclip).\
+🔴 Add gravity (for both player and objects) and jumping on space, adjust noclip (separate fly and noclip).\
 🔴 Add collision response for props (add basic physics).\
 🔴 Optimize octree update.\
 🔴 Add raycasting (camera frustum intersecting with octree).\

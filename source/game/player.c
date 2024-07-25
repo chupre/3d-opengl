@@ -4,10 +4,10 @@
 // Custom modules
 #include <player.h>
 #include <vector.h>
-#include <prop.h>
+#include <object.h>
 
 Player player;
-Prop playerProp;
+Object playerProp;
 
 void initPlayer() {
     player.height = 1.0f;
@@ -22,7 +22,7 @@ void initPlayer() {
     // Set states to default
     player.states.noclip = false;
     
-    // Initializing standalone player prop for inserting it in octree
+    // Initializing standalone player object for inserting it in octree
     playerProp.bbox = player.bbox;
 }
 

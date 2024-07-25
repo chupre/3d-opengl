@@ -19,12 +19,12 @@
 #define NODE_MAX_PROPS 4
 #define NODE_MAX_DEPTH 64
 
-typedef struct Prop Prop;
+typedef struct Object Object;
 typedef struct OctreeNode OctreeNode;
 
 // Octree struct implemented to optimize collision
 struct OctreeNode {
-  Prop **props;
+  Object **objects;
   int propsCount;
   int depth;
   Bbox nodeRegion;
@@ -38,7 +38,7 @@ extern bool dbgRenderOctree;
 
 OctreeNode* octreeCreate(float xMin, float yMin, float zMin, float xMax, float yMax, float zMax);
 void octreeSubdivide(OctreeNode* node);
-void octreeInsertProp(Prop* prop, OctreeNode* node);
+void octreeInsertProp(Object* object, OctreeNode* node);
 void octreeDraw(OctreeNode* node);
 void octreeKill(OctreeNode *node);
 void octreeUpdate(OctreeNode *node);

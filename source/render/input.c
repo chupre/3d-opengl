@@ -5,7 +5,7 @@
 #include <render.h>
 #include <octree.h>
 #include <player.h>
-#include <prop.h>
+#include <object.h>
 #include <window.h>
 
 // Keymap for keys.
@@ -89,8 +89,8 @@ GLvoid keyCallback(GLFWwindow* window, int key, int scancode, int action, int mo
         // Debug: placing cube
         if (key == GLFW_KEY_F && action == GLFW_PRESS) {
             vec3 cubeOffset = {5.0f, 5.0f, 5.0f };
-            Prop* cube = malloc(sizeof(Prop));
-            newProp(cube, player.position, cubeOffset, true);
+            Object* cube = malloc(sizeof(Object));
+            newObject(cube, player.position, cubeOffset, true);
         }
 }
 

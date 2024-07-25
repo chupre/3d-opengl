@@ -3,7 +3,7 @@
 #include <player.h>
 #include <octree.h>
 
-// Checks collision for every prop in the player node, return true if there is collision
+// Checks collision for every object in the player node, return true if there is collision
 bool playerCollisionDetect(vec3 newPos) {
   if (player.states.noclip)
     return false;
@@ -15,9 +15,9 @@ bool playerCollisionDetect(vec3 newPos) {
 
   for (int i = 0; i < playerProp.nodesCount; i++)
     for (int j = 0; j < playerProp.nodes[i]->propsCount; j++) {
-      if (playerProp.nodes[i]->props[j]->hasCollision &&
-          &playerProp != playerProp.nodes[i]->props[j] && 
-          AABBcollision(playerProp.bbox, playerProp.nodes[i]->props[j]->bbox))
+      if (playerProp.nodes[i]->objects[j]->hasCollision &&
+          &playerProp != playerProp.nodes[i]->objects[j] && 
+          AABBcollision(playerProp.bbox, playerProp.nodes[i]->objects[j]->bbox))
         return true;
     }
 

@@ -51,7 +51,7 @@ GLvoid updateCameraPosition() {
     // Copy camera pos to player pos
     glm_vec3_copy(camera.currPos, player.position);
 
-    // Updates player bbox for player prop in octree
+    // Updates player bbox for player object in octree
     getNewPlayerBbox(player.position, &playerProp.bbox);
 
     // Reset speedMultiplier to default.

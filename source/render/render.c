@@ -1,7 +1,7 @@
 // Custom modules
 #include <render.h>
 #include <window.h>
-#include <prop.h>
+#include <object.h>
 #include <camera.h>
 #include <update.h>
 #include <octree.h>
@@ -40,11 +40,11 @@ GLvoid render() {
     // Apply linear interpolation to camera movement
     glm_vec3_lerp(camera.currPos, camera.targetPos, deltaTime * INTERPOLATION_MULTIPLIER, camera.currPos);
     
-    // Rendering evry prop
-    for (int i = 0; i < active_props; i++) {
-        setModelUniform(props[i]->model);
+    // Rendering evry object
+    for (int i = 0; i < active_objects; i++) {
+        setModelUniform(objects[i]->model);
 
-        glBindVertexArray(props[i]->VAO);
+        glBindVertexArray(objects[i]->VAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
     }
 

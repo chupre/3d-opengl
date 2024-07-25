@@ -14,7 +14,7 @@ set(SOURCES
     source/render/camera.c
     source/render/input.c
     source/render/window.c
-    source/game/prop.c
+    source/game/object.c
     source/game/physics/collision.c
     source/game/vector.c
     source/game/octree.c

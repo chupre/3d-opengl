@@ -1,7 +1,7 @@
 #include <octree.h>
 #include <collision.h>
 #include <vector.h>
-#include <prop.h>
+#include <object.h>
 #include <player.h>
 #include <update.h>
 #include <camera.h>
@@ -19,7 +19,7 @@ OctreeNode *octreeCreate(float xMin, float yMin, float zMin,
   newVec3(node->nodeRegion.max, xMax, yMax, zMax);
   node->propsCount = 0;
   node->isLeaf = true;
-  node->props = NULL;
+  node->objects = NULL;
   node->depth = 0;
   for (int i = 0; i < 8; i++)
     node->children[i] = NULL;
@@ -78,27 +78,27 @@ void octreeSubdivide(OctreeNode *node) {
     node->children[i]->depth = node->depth + 1;
 }
 
-// Recursively inserts a prop in node by dividing the octree
-void octreeInsertProp(Prop *prop, OctreeNode *node) {
+// Recursively inserts a object in node by dividing the octree
+void octreeInsertProp(Object *object, OctreeNode *node) {
   for (int i = 0; i < 8; i++) {
-    if (node->children[i] != NULL && AABBcollision(node->children[i]->nodeRegion, prop->bbox)) {
+    if (node->children[i] != NULL && AABBcollision(node->children[i]->nodeRegion, object->bbox)) {
       if (!node->children[i]->isLeaf) {
-        octreeInsertProp(prop, node->children[i]);
+        octreeInsertProp(object, node->children[i]);
       } else if (node->children[i]->propsCount < NODE_MAX_PROPS || node->children[i]->depth == NODE_MAX_DEPTH) {
-        if (prop->nodesCount < PROP_MAX_NODES) {
-          prop->nodesCount++;
-          prop->nodes[prop->nodesCount - 1] = node->children[i];
+        if (object->nodesCount < OBJECT_MAX_NODES) {
+          object->nodesCount++;
+          object->nodes[object->nodesCount - 1] = node->children[i];
         }
 
         node->children[i]->propsCount++;
-        node->children[i]->props = realloc(node->children[i]->props, node->children[i]->propsCount * sizeof(Prop *));
-        node->children[i]->props[node->children[i]->propsCount - 1] = prop;
+        node->children[i]->objects = realloc(node->children[i]->objects, node->children[i]->propsCount * sizeof(Object *));
+        node->children[i]->objects[node->children[i]->propsCount - 1] = object;
       } else {
         octreeSubdivide(node->children[i]); 
         for (int j = 0; j < node->children[i]->propsCount; j++)
-          octreeInsertProp(node->children[i]->props[j], node->children[i]);
-        octreeInsertProp(prop, node->children[i]);
-        node->children[i]->props = NULL;
+          octreeInsertProp(node->children[i]->objects[j], node->children[i]);
+        octreeInsertProp(object, node->children[i]);
+        node->children[i]->objects = NULL;
         node->children[i]->propsCount = 0;
       }
     }
@@ -246,13 +246,13 @@ void octreeKill(OctreeNode* node) {
   if (node != NULL) {
     if (node->propsCount > 0) {
       for (int i = 0; i < node->propsCount; i++) {
-        for (int j = 0; j < node->props[i]->nodesCount; j++)
-          node->props[i]->nodes[j] = NULL;
+        for (int j = 0; j < node->objects[i]->nodesCount; j++)
+          node->objects[i]->nodes[j] = NULL;
 
-        node->props[i]->nodesCount = 0;
+        node->objects[i]->nodesCount = 0;
       }
       
-      free(node->props);
+      free(node->objects);
     }
 
     if (!node->isLeaf)
@@ -277,9 +277,9 @@ void octreeUpdate(OctreeNode *node) {
   root = octreeCreate(-worldSize, -worldSize, -worldSize, worldSize, worldSize, worldSize);
 
   // Inserting all props in octree
-  for (int i = 0; i < active_props; i++) 
-    octreeInsertProp(props[i], root);
+  for (int i = 0; i < active_objects; i++) 
+    octreeInsertProp(objects[i], root);
   
-  // Updating player prop to insert it in octree
+  // Updating player object to insert it in octree
   octreeInsertProp(&playerProp, root);
 }
