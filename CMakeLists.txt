@@ -18,10 +18,11 @@ set(SOURCES
     source/game/physics/collision.c
     source/game/vector.c
     source/game/octree.c
+    source/render/texture.c
 )
 
 # Add executable target
-add_executable(3D-OpenGL ${SOURCES} external/glad/glad.c)
+add_executable(3D-OpenGL ${SOURCES} external/glad/glad.c external/stb/stb_image.c)
 
 # Link libraries
 if (WIN32)

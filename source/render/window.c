@@ -1,6 +1,3 @@
-// Must be defined in .c file
-#define STB_IMAGE_IMPLEMENTATION
-
 // Custom modules
 #include <window.h>
 #include <input.h>
@@ -44,7 +41,9 @@ GLvoid setWindow() {
     GLFWimage images[1];
     images[0].width = iconWidth;
     images[0].height = iconHeight;
-    images[0].pixels = pixels; glfwSetWindowIcon(window, 1, images);
+    images[0].pixels = pixels; 
+    glfwSetWindowIcon(window, 1, images);
+    stbi_image_free(pixels);
 
     // Setting input callbacks
     glfwSetKeyCallback(window, keyCallback);

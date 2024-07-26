@@ -12,6 +12,7 @@
 #include <window.h>
 #include <object.h>
 #include <collision.h>
+#include <texture.h>
 
 int main(int argc, char** argv) {
     // Creating window
@@ -23,6 +24,9 @@ int main(int argc, char** argv) {
     // Preinitializing object pointers array
     initObjectArray();
 
+    // Sets up OpenGL and loads textures
+    initTextures();
+    
     vec3 planeOffset = {50.0f, 0.0f, 50.0f};
     vec3 planePos = { 0.0f, 0.0f, 0.0f };
     Object plane;
@@ -78,8 +82,7 @@ int main(int argc, char** argv) {
                 deltaTimeTick--;
             }
         }
-// make a bind for placing objects
-// think about search algorithm
+
         render();
 
         showFPS();

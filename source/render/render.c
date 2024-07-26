@@ -40,10 +40,10 @@ GLvoid render() {
     // Apply linear interpolation to camera movement
     glm_vec3_lerp(camera.currPos, camera.targetPos, deltaTime * INTERPOLATION_MULTIPLIER, camera.currPos);
     
-    // Rendering evry object
+    // Rendering every object
     for (int i = 0; i < active_objects; i++) {
         setModelUniform(objects[i]->model);
-
+        glBindTexture(GL_TEXTURE_2D, objects[i]->texture.glName);
         glBindVertexArray(objects[i]->VAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
     }

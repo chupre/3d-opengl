@@ -12,6 +12,7 @@
 // Custom modules
 #include <bbox.h>
 #include <octree.h>
+#include <texture.h>
 
 #define OBJECT_MAX_VERTICES 64
 #define OBJECT_MAX_NODES 64
@@ -32,6 +33,7 @@ struct Object {
     bool hasCollision;
     int nodesCount;
     OctreeNode* nodes[OBJECT_MAX_NODES];
+    Texture texture;
 };
 
 extern Object* objects[MAX_OBJECTS];

@@ -29,49 +29,57 @@ void newObject(Object* object, vec3 pos, vec3 offset, bool hasCollision) {
     GLfloat x = offset[0];
     GLfloat y = offset[1];
     GLfloat z = offset[2];
-    GLfloat objectVertices[] = 
-    {
-    -x, -y, -z,
-     x, -y, -z,
-     x,  y, -z,
-     x,  y, -z,
-    -x,  y, -z,
-    -x, -y, -z,
 
-    -x, -y,  z,
-     x, -y,  z,
-     x,  y,  z,
-     x,  y,  z,
-    -x,  y,  z,
-    -x, -y,  z,
+    // Define the vertices and texture coordinates
+    GLfloat objectVertices[] = {
+        // Positions          // Texture Coords
+        // Front face
+        -x, -y, -z,          0.0f, 0.0f,
+         x, -y, -z,          1.0f, 0.0f,
+         x,  y, -z,          1.0f, 1.0f,
+         x,  y, -z,          1.0f, 1.0f,
+        -x,  y, -z,          0.0f, 1.0f,
+        -x, -y, -z,          0.0f, 0.0f,
 
-    -x,  y,  z,
-    -x,  y, -z,
-    -x, -y, -z,
-    -x, -y, -z,
-    -x, -y,  z,
-    -x,  y,  z,
+        // Back face
+        -x, -y,  z,          0.0f, 0.0f,
+         x, -y,  z,          1.0f, 0.0f,
+         x,  y,  z,          1.0f, 1.0f,
+         x,  y,  z,          1.0f, 1.0f,
+        -x,  y,  z,          0.0f, 1.0f,
+        -x, -y,  z,          0.0f, 0.0f,
 
-     x,  y,  z,
-     x,  y, -z,
-     x, -y, -z,
-     x, -y, -z,
-     x, -y,  z,
-     x,  y,  z,
+        // Left face
+        -x,  y,  z,          0.0f, 0.0f,
+        -x,  y, -z,          1.0f, 0.0f,
+        -x, -y, -z,          1.0f, 1.0f,
+        -x, -y, -z,          1.0f, 1.0f,
+        -x, -y,  z,          0.0f, 1.0f,
+        -x,  y,  z,          0.0f, 0.0f,
 
-    -x, -y, -z,
-     x, -y, -z,
-     x, -y,  z,
-     x, -y,  z,
-    -x, -y,  z,
-    -x, -y, -z,
+        // Right face
+        x,  y, -z,           1.0f, 0.0f,
+        x,  y,  z,           0.0f, 0.0f,
+        x, -y, -z,           1.0f, 1.0f,
+        x, -y, -z,           1.0f, 1.0f,
+        x, -y,  z,           0.0f, 1.0f,
+        x,  y,  z,           0.0f, 0.0f,
 
-    -x,  y, -z,
-     x,  y, -z,
-     x,  y,  z,
-     x,  y,  z,
-    -x,  y,  z,
-    -x,  y, -z,
+        // Bottom face
+        -x, -y, -z,          0.0f, 0.0f,
+         x, -y, -z,          1.0f, 0.0f,
+         x, -y,  z,          1.0f, 1.0f,
+         x, -y,  z,          1.0f, 1.0f,
+        -x, -y,  z,          0.0f, 1.0f,
+        -x, -y, -z,          0.0f, 0.0f,
+
+        // Top face
+        -x,  y, -z,          0.0f, 0.0f,
+         x,  y, -z,          1.0f, 0.0f,
+         x,  y,  z,          1.0f, 1.0f,
+         x,  y,  z,          1.0f, 1.0f,
+        -x,  y,  z,          0.0f, 1.0f,
+        -x,  y, -z,          0.0f, 0.0f,
     };
     
     memcpy(object->vertices, objectVertices, sizeof(objectVertices));
@@ -80,6 +88,7 @@ void newObject(Object* object, vec3 pos, vec3 offset, bool hasCollision) {
 
     for (int i = 0; i < OBJECT_MAX_NODES; i++)
         object->nodes[i] = NULL;
+
     object->nodesCount = 0;
 
     // Setting collision
@@ -94,6 +103,9 @@ void newObject(Object* object, vec3 pos, vec3 offset, bool hasCollision) {
     // Setting model matrix
     glm_mat4_identity(object->model);
     glm_translate(object->model, object->pos);
+
+    // Setting default texture
+    object->texture = default_texture;
     
     // Setting VBO and VAO
     glGenVertexArrays(1, &object->VAO);
@@ -101,8 +113,10 @@ void newObject(Object* object, vec3 pos, vec3 offset, bool hasCollision) {
     glGenBuffers(1, &object->VBO);
     glBindBuffer(GL_ARRAY_BUFFER, object->VBO);
     glBufferData(GL_ARRAY_BUFFER, OBJECT_MAX_VERTICES * sizeof(vec3), object->vertices, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void *)0);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void *)(3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);  
 
     // Unbinding
     glBindVertexArray(0);
@@ -119,7 +133,7 @@ void initObjectArray() {
 void killObject(Object* object) {
     for (int i = 0; i < MAX_OBJECTS; i++) {
         if (objects[i] == object) {
-            free(object->nodes);
+            // free(object->nodes);
             objects[i] = NULL;    
             active_objects--;
 
