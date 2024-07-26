@@ -14,7 +14,7 @@
 🟢 Add octree optimization.\
 🟢 Rename props to objects.\
 🟢 Add basic textures implementation.\
-🔴 Add texture preloading.\
+🟢 Add texture preloading.\
 🔴 Add skybox.\
 🔴 Remake shader function and make shader for octree render.\
 🔴 Add basic lightning.\

@@ -90,7 +90,7 @@ GLvoid keyCallback(GLFWwindow* window, int key, int scancode, int action, int mo
         if (key == GLFW_KEY_F && action == GLFW_PRESS) {
             vec3 cubeOffset = {5.0f, 5.0f, 5.0f };
             Object* cube = malloc(sizeof(Object));
-            newObject(cube, player.position, cubeOffset, true);
+            newObject(cube, player.position, cubeOffset, true, 1.0f);
         }
 }
 

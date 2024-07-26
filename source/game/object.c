@@ -7,7 +7,7 @@ Object* objects[MAX_OBJECTS];
 int active_objects = 0;
 
 // Creates object VBO and VAO and sets object's fields
-void newObject(Object* object, vec3 pos, vec3 offset, bool hasCollision) {
+void newObject(Object* object, vec3 pos, vec3 offset, bool hasCollision, float textureTilingMultiplier) {
     bool objectCreated = false;
 
     // Setting pointer in objects array
@@ -35,50 +35,50 @@ void newObject(Object* object, vec3 pos, vec3 offset, bool hasCollision) {
         // Positions          // Texture Coords
         // Front face
         -x, -y, -z,          0.0f, 0.0f,
-         x, -y, -z,          1.0f, 0.0f,
-         x,  y, -z,          1.0f, 1.0f,
-         x,  y, -z,          1.0f, 1.0f,
-        -x,  y, -z,          0.0f, 1.0f,
+         x, -y, -z,          textureTilingMultiplier, 0.0f,
+         x,  y, -z,          textureTilingMultiplier, textureTilingMultiplier,
+         x,  y, -z,          textureTilingMultiplier, textureTilingMultiplier,
+        -x,  y, -z,          0.0f, textureTilingMultiplier,
         -x, -y, -z,          0.0f, 0.0f,
 
         // Back face
         -x, -y,  z,          0.0f, 0.0f,
-         x, -y,  z,          1.0f, 0.0f,
-         x,  y,  z,          1.0f, 1.0f,
-         x,  y,  z,          1.0f, 1.0f,
-        -x,  y,  z,          0.0f, 1.0f,
+         x, -y,  z,          textureTilingMultiplier, 0.0f,
+         x,  y,  z,          textureTilingMultiplier, textureTilingMultiplier,
+         x,  y,  z,          textureTilingMultiplier, textureTilingMultiplier,
+        -x,  y,  z,          0.0f, textureTilingMultiplier,
         -x, -y,  z,          0.0f, 0.0f,
 
         // Left face
         -x,  y,  z,          0.0f, 0.0f,
-        -x,  y, -z,          1.0f, 0.0f,
-        -x, -y, -z,          1.0f, 1.0f,
-        -x, -y, -z,          1.0f, 1.0f,
-        -x, -y,  z,          0.0f, 1.0f,
+        -x,  y, -z,          textureTilingMultiplier, 0.0f,
+        -x, -y, -z,          textureTilingMultiplier, textureTilingMultiplier,
+        -x, -y, -z,          textureTilingMultiplier, textureTilingMultiplier,
+        -x, -y,  z,          0.0f, textureTilingMultiplier,
         -x,  y,  z,          0.0f, 0.0f,
 
         // Right face
-        x,  y, -z,           1.0f, 0.0f,
+        x,  y, -z,           textureTilingMultiplier, 0.0f,
         x,  y,  z,           0.0f, 0.0f,
-        x, -y, -z,           1.0f, 1.0f,
-        x, -y, -z,           1.0f, 1.0f,
-        x, -y,  z,           0.0f, 1.0f,
+        x, -y, -z,           textureTilingMultiplier, textureTilingMultiplier,
+        x, -y, -z,           textureTilingMultiplier, textureTilingMultiplier,
+        x, -y,  z,           0.0f, textureTilingMultiplier,
         x,  y,  z,           0.0f, 0.0f,
 
         // Bottom face
         -x, -y, -z,          0.0f, 0.0f,
-         x, -y, -z,          1.0f, 0.0f,
-         x, -y,  z,          1.0f, 1.0f,
-         x, -y,  z,          1.0f, 1.0f,
-        -x, -y,  z,          0.0f, 1.0f,
+         x, -y, -z,          textureTilingMultiplier, 0.0f,
+         x, -y,  z,          textureTilingMultiplier, textureTilingMultiplier,
+         x, -y,  z,          textureTilingMultiplier, textureTilingMultiplier,
+        -x, -y,  z,          0.0f, textureTilingMultiplier,
         -x, -y, -z,          0.0f, 0.0f,
 
         // Top face
         -x,  y, -z,          0.0f, 0.0f,
-         x,  y, -z,          1.0f, 0.0f,
-         x,  y,  z,          1.0f, 1.0f,
-         x,  y,  z,          1.0f, 1.0f,
-        -x,  y,  z,          0.0f, 1.0f,
+         x,  y, -z,          textureTilingMultiplier, 0.0f,
+         x,  y,  z,          textureTilingMultiplier, textureTilingMultiplier,
+         x,  y,  z,          textureTilingMultiplier, textureTilingMultiplier,
+        -x,  y,  z,          0.0f, textureTilingMultiplier,
         -x,  y, -z,          0.0f, 0.0f,
     };
     
