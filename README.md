@@ -13,7 +13,9 @@
 🟢 Add simple player collision.\
 🟢 Add octree optimization.\
 🟢 Rename props to objects.\
-🔴 Implement textures (add textures preload?) and skybox.\
+🟢 Add basic textures implementation.\
+🔴 Add texture preloading.\
+🔴 Add skybox.\
 🔴 Remake shader function and make shader for octree render.\
 🔴 Add basic lightning.\
 🔴 Add text rendering (FPS counter).\

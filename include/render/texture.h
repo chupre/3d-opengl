@@ -5,6 +5,7 @@
 #include <glad/glad.h>
 
 #define TEXTURE_PATH_SIZE 256
+#define TEXTURES_MAX 256
 
 typedef struct Texture { 
     int width;
@@ -12,9 +13,12 @@ typedef struct Texture {
     int channels;
     unsigned int glName;
     unsigned char* pixels;
+    unsigned char name[TEXTURE_PATH_SIZE];
 } Texture;
 
 extern Texture default_texture;
+extern Texture textures[TEXTURES_MAX];
+extern int texture_count;
 
-void initTextures();
+void loadTextures();
 Texture newTexture(unsigned char* image_name);

@@ -41,3 +41,4 @@ extern Object* objects[MAX_OBJECTS];
 void newObject(Object* object, vec3 pos, vec3 offset, bool hasCollision);
 void killObject(Object* object);
 void initObjectArray();
+void setObjectTexture(Object* object, unsigned char* texture_name);

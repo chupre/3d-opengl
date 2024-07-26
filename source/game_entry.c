@@ -25,37 +25,43 @@ int main(int argc, char** argv) {
     initObjectArray();
 
     // Sets up OpenGL and loads textures
-    initTextures();
+    loadTextures();
     
     vec3 planeOffset = {50.0f, 0.0f, 50.0f};
     vec3 planePos = { 0.0f, 0.0f, 0.0f };
     Object plane;
     newObject(&plane, planePos, planeOffset, true);
+    setObjectTexture(&plane, "grass.png");
 
     vec3 test1Offset = {2.0f, 5.0f, 2.0f };
     vec3 test1Pos = { 10.0f, 5.0f, 0.0f };
     Object test1;
     newObject(&test1, test1Pos, test1Offset, true);
+    setObjectTexture(&test1, "stone.png");
 
     vec3 test2Offset = {2.0f, 5.0f, 2.0f };
     vec3 test2Pos = { -10.0f, 5.0f, 0.0f };
     Object test2;
     newObject(&test2, test2Pos, test2Offset, true);
+    setObjectTexture(&test2, "stone.png");
     
     vec3 test3Offset = {2.0f, 5.0f, 2.0f };
     vec3 test3Pos = { 10.0f, 5.0f, 10.0f };
     Object test3;
     newObject(&test3, test3Pos, test3Offset, true);
+    setObjectTexture(&test3, "stone.png");
     
     vec3 test4Offset = {2.0f, 5.0f, 2.0f };
     vec3 test4Pos = { -10.0f, 5.0f, 10.0f };
     Object test4;
     newObject(&test4, test4Pos, test4Offset, true);
+    setObjectTexture(&test4, "stone.png");
     
     vec3 test5Offset = {12.0f, 0.0f, 7.0f };
     vec3 test5Pos = { 0.0f, 10.0f, 5.0f };
     Object test5;
     newObject(&test5, test5Pos, test5Offset, true);
+    setObjectTexture(&test5, "stone.png");
 
     octreeUpdate(root);
 
