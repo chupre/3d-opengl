@@ -19,6 +19,7 @@ set(SOURCES
     source/game/vector.c
     source/game/octree.c
     source/render/texture.c
+    source/render/models.c
 )
 
 # Add executable target

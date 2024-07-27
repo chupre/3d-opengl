@@ -17,12 +17,14 @@
 🟢 Add texture preloading.\
 🟢 Add skybox.\
 🟢 Remake shader function and make shader for octree render.\
-🔴 Add model loader.\
 🔴 Add basic lighting.\
+🔴 Add model loader.\
+🔴 Fully migrate to glDrawElements.\
 🔴 Add text rendering (FPS counter).\
 🔴 Fix movement.\
 🔴 Add gravity (for both player and objects) and jumping on space, adjust noclip (separate fly and noclip).\
 🔴 Add collision response for props (add basic physics).\
 🔴 Optimize octree update.\
 🔴 Add raycasting (camera frustum intersecting with octree).\
-🔴 Add GUI for settings.
+🔴 Add GUI for settings.\
+🔴 Add texture tiling.
