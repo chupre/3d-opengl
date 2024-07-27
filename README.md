@@ -17,9 +17,9 @@
 🟢 Add texture preloading.\
 🟢 Add skybox.\
 🟢 Remake shader function and make shader for octree render.\
+🔴 Add model loader.\
 🔴 Add basic lighting.\
 🔴 Add text rendering (FPS counter).\
-🔴 Add model loader.\
 🔴 Fix movement.\
 🔴 Add gravity (for both player and objects) and jumping on space, adjust noclip (separate fly and noclip).\
 🔴 Add collision response for props (add basic physics).\

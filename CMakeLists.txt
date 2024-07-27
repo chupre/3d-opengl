@@ -28,5 +28,5 @@ add_executable(3D-OpenGL ${SOURCES} external/glad/glad.c external/stb/stb_image.
 if (WIN32)
     target_link_libraries(3D-OpenGL ${CMAKE_CURRENT_SOURCE_DIR}/external/GLFW/glfw3.lib)
 else()
-    target_link_libraries(3D-OpenGL glfw m)
+    target_link_libraries(3D-OpenGL glfw m assimp)
 endif()

@@ -11,8 +11,8 @@ extern GLchar* window_name;
 extern GLFWwindow* window;
 
 // Window size
-#define WINDOW_WIDTH 1280
-#define WINDOW_HEIGHT 960
+#define WINDOW_WIDTH 1920
+#define WINDOW_HEIGHT 1080
 extern GLint screenWidth;
 extern GLint screenHeight;
 
