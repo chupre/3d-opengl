@@ -105,7 +105,7 @@ void newObject(Object* object, vec3 pos, vec3 offset, bool hasCollision, float t
     glm_translate(object->model, object->pos);
 
     // Setting default texture
-    object->texture = default_texture;
+    setObjectTexture(object, "default.png");
     
     // Setting VBO and VAO
     glGenVertexArrays(1, &object->VAO);

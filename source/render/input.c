@@ -7,6 +7,7 @@
 #include <player.h>
 #include <object.h>
 #include <window.h>
+#include <shader.h>
 
 // Keymap for keys.
 // Key code == key index.
@@ -144,5 +145,5 @@ GLvoid scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
         camera.FOV = DEFAULT_FOV;
 
     // Recalculating projection matrix based on new FOV
-    setProjectionUniform();
+    setProjectionUniform(mainShader);
 }

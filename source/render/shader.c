@@ -1,11 +1,11 @@
 // Custom modules
 #include <shader.h>
 
-GLuint shaderProgram;
+unsigned int mainShader;
+unsigned int octreeShader;
 
 // Parse shader code in string
-char* getShaderContent(const GLchar* fileName)
-{
+char* getShaderContent(const GLchar* fileName) {
     FILE* shaderFile;
     long size = 0;
     char* shaderContent;
@@ -26,27 +26,41 @@ char* getShaderContent(const GLchar* fileName)
     return shaderContent;
 }
 
-// Create shader
-void setShader()
-{
-    const GLchar* vertexShaderSource = getShaderContent("../source/shaders/vertex_shader.glsl");
-    const GLchar* fragmentShaderSource = getShaderContent("../source/shaders/fragment_shader.glsl");
+// Returns shader
+unsigned int genShader(char* vertexShaderName, char* fragmentShaderName) {
+    // Constructing file paths
+    char vertexShaderFullPath[SHADER_MAX_PATH] = "../source/shaders/";
+    char fragmentShaderFullPath[SHADER_MAX_PATH] = "../source/shaders/";
+    strcat(vertexShaderFullPath, vertexShaderName);
+    strcat(fragmentShaderFullPath, fragmentShaderName);
+    strcat(vertexShaderFullPath, ".glsl");
+    strcat(fragmentShaderFullPath, ".glsl");
 
-    GLuint vertexShader;
+    const char* vertexShaderSource = getShaderContent(vertexShaderFullPath);
+    const char* fragmentShaderSource = getShaderContent(fragmentShaderFullPath);
+
+    unsigned int vertexShader;
     vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
     glCompileShader(vertexShader);
 
-    GLuint fragmentShader;
+    unsigned int fragmentShader;
     fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
     glCompileShader(fragmentShader);
 
-    shaderProgram = glCreateProgram();
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-    glLinkProgram(shaderProgram);
+    unsigned int shader = glCreateProgram();
+    glAttachShader(shader, vertexShader);
+    glAttachShader(shader, fragmentShader);
+    glLinkProgram(shader);
 
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
+
+    return shader;
+}
+
+void loadShaders() {
+    mainShader = genShader("vMain", "fMain");
+    octreeShader = genShader("vOctree", "fOctree");
 }

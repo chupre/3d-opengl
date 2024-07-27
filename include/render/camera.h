@@ -39,8 +39,8 @@ extern vec3 Z_AXIS;
 extern Camera camera;
 
 void initCamera();
-void setModelUniform(mat4 model);
-void setViewUniform();
-void setProjectionUniform();
+void setModelUniform(mat4 model, unsigned int shader);
+void setViewUniform(unsigned int shader);
+void setProjectionUniform(unsigned int shader);
 void moveCameraTarget(enum direction dir);
 void applyMouseInput();

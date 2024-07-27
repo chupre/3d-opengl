@@ -16,7 +16,7 @@
 🟢 Add basic textures implementation.\
 🟢 Add texture preloading.\
 🔴 Add skybox.\
-🔴 Remake shader function and make shader for octree render.\
+🟢 Remake shader function and make shader for octree render.\
 🔴 Add basic lightning.\
 🔴 Add text rendering (FPS counter).\
 🔴 Add model loader.\

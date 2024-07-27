@@ -18,8 +18,8 @@ int main(int argc, char** argv) {
     // Creating window
     setWindow();
 
-    // Generate shader program
-    setShader();
+    // Loads all shader programs
+    loadShaders();
 
     // Preinitializing object pointers array
     initObjectArray();
@@ -27,10 +27,10 @@ int main(int argc, char** argv) {
     // Sets up OpenGL and loads textures
     loadTextures();
     
-    vec3 planeOffset = {50.0f, 0.0f, 50.0f};
+    vec3 planeOffset = {500.0f, 0.0f, 500.0f};
     vec3 planePos = { 0.0f, 0.0f, 0.0f };
     Object plane;
-    newObject(&plane, planePos, planeOffset, true, 10.0f);
+    newObject(&plane, planePos, planeOffset, true, 80.0f);
     setObjectTexture(&plane, "grass.png");
 
     vec3 test1Offset = {2.0f, 5.0f, 2.0f };
@@ -72,10 +72,10 @@ int main(int argc, char** argv) {
     initCamera();
 
     // Activate shader
-    glUseProgram(shaderProgram);
+    glUseProgram(mainShader);
 
     // Since projection matrix rarely changes there is no need to put it in render loop
-    setProjectionUniform();
+    setProjectionUniform(mainShader);
 
     // Main loop
     while(isRunning) {

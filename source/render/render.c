@@ -6,6 +6,7 @@
 #include <update.h>
 #include <octree.h>
 #include <input.h>
+#include <shader.h>
 
 // Is app paused. Initially set to false.
 bool isPaused = false;
@@ -35,14 +36,16 @@ GLvoid render() {
     glClearColor(0.529f, 0.808f, 0.922f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    setViewUniform();
+    glUseProgram(mainShader);
+
+    setViewUniform(mainShader);
 
     // Apply linear interpolation to camera movement
     glm_vec3_lerp(camera.currPos, camera.targetPos, deltaTime * INTERPOLATION_MULTIPLIER, camera.currPos);
     
     // Rendering every object
     for (int i = 0; i < active_objects; i++) {
-        setModelUniform(objects[i]->model);
+        setModelUniform(objects[i]->model, mainShader);
         glBindTexture(GL_TEXTURE_2D, objects[i]->texture.glName);
         glBindVertexArray(objects[i]->VAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);

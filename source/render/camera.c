@@ -35,14 +35,14 @@ void initCamera() {
 }
 
 // Set model matrix uniform in vertex shader
-void setModelUniform(mat4 model) {
+void setModelUniform(mat4 model, unsigned int shader) {
     // Setting model uniform
-    int modelLoc = glGetUniformLocation(shaderProgram, "model");
+    int modelLoc = glGetUniformLocation(shader, "model");
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, model);
 }
 
 // Set view matrix uniform in vertex shader
-void setViewUniform() {
+void setViewUniform(unsigned int shader) {
     // Creating view matrix
     mat4 view;
     vec3 temp;
@@ -50,19 +50,19 @@ void setViewUniform() {
     glm_lookat(camera.currPos, temp, camera.up, view);
 
     // Setting view uniform
-    int viewLoc = glGetUniformLocation(shaderProgram, "view");
+    int viewLoc = glGetUniformLocation(shader, "view");
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, view);
 }
 
 // Set projection matrix uniform in vertex shader
-void setProjectionUniform() {
+void setProjectionUniform(unsigned int shader) {
     // Creating projection matrix
     mat4 projection;
     glm_mat4_identity(projection);
     glm_perspective(glm_rad(camera.FOV), (float)screenWidth / (float)screenHeight, 0.1f, RENDER_DISTANCE, projection);
 
     // Setting projection uniform
-    int projectionLoc = glGetUniformLocation(shaderProgram, "projection");
+    int projectionLoc = glGetUniformLocation(shader, "projection");
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, projection);
 }
 

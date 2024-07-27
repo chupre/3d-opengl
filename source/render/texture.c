@@ -5,15 +5,22 @@
 // Custom modules
 #include <texture.h>
 
-Texture default_texture;
 Texture textures[TEXTURES_MAX];
 int texture_count = 0;
+unsigned int skybox;
 
 // Load textures and sets up OpenGL
 void loadTextures() {
-    stbi_set_flip_vertically_on_load(1);
-
-    default_texture = newTexture("default.png");
+    const unsigned char* faces[] = {
+        "right.jpg",
+        "left.jpg",
+        "top.jpg",
+        "bottom.jpg",
+        "front.jpg",
+        "back.jpg"
+    };
+    
+    skybox = getCubemapTexture(faces);
 
     struct dirent *dirEntry;
 
@@ -24,12 +31,10 @@ void loadTextures() {
     }
 
     while ((dirEntry = readdir(dir)) != NULL)
-        if (strcmp(dirEntry->d_name, ".") != 0 && 
-            strcmp(dirEntry->d_name, "..") && 
-            strcmp(dirEntry->d_name, "default.png")) {
-                textures[texture_count] = newTexture(dirEntry->d_name);
-                texture_count++;
-            }
+        if (strstr(dirEntry->d_name, ".png") != NULL) {
+            textures[texture_count] = newTexture(dirEntry->d_name);
+            texture_count++;
+        }
 
     closedir(dir);
 }
@@ -67,4 +72,31 @@ Texture newTexture(unsigned char* image_name) {
     stbi_image_free(texture.pixels);
 
     return texture;
+}
+
+// Returns a cubemap texture
+unsigned int getCubemapTexture(const unsigned char** faces) {
+    unsigned int cubemapID;
+    glGenTextures(1, &cubemapID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapID);
+
+    int width, height, channels;
+    for (int i = 0; i < CUBE_FACES; i++) {
+        unsigned char* pixels = stbi_load(faces[i], &width, &height, &channels, 0);
+
+        if (pixels) {
+            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
+                         0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+
+            stbi_image_free(pixels);
+        }
+    }
+
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+    return cubemapID;
 }

@@ -6,9 +6,13 @@
 // External
 #include <glad/glad.h>
 
-extern GLuint shaderProgram;
+#define SHADER_MAX_PATH 256
 
-void setShader();
-char* getShaderContent(const GLchar* fileName);
+extern unsigned int mainShader;
+extern unsigned int octreeShader;
+
+void loadShaders();
+unsigned int genShader(char* vertexShaderName, char* fragmentShaderName);
+char* getShaderContent(const char* fileName);
 
 

@@ -5,6 +5,7 @@
 #include <player.h>
 #include <update.h>
 #include <camera.h>
+#include <shader.h>
 
 OctreeNode *root;
 bool octreeCreated = false;
@@ -212,6 +213,8 @@ void octreeDraw(OctreeNode *node) {
       nodeCenter[2] + nodeSize,
   };
 
+  glUseProgram(octreeShader);
+
   // Setting VBO and VAO
   unsigned int nodeVAO, nodeVBO;
   glGenVertexArrays(1, &nodeVAO);
@@ -225,7 +228,10 @@ void octreeDraw(OctreeNode *node) {
   // Setting identity model matrix
   mat4 model;
   glm_mat4_identity(model);
-  setModelUniform(model);
+
+  setViewUniform(octreeShader);
+  setModelUniform(model, octreeShader);
+  setProjectionUniform(octreeShader);
 
   // Render the node
   glBindVertexArray(nodeVAO);
