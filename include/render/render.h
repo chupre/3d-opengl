@@ -14,5 +14,6 @@ extern bool isPaused;
 // Is app running. Intially set to true.
 extern bool isRunning;
 
-GLvoid togglePause();
-GLvoid render();
+void showFPS();
+void togglePause();
+void render();

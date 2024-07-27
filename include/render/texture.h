@@ -3,6 +3,7 @@
 // External
 #include <stb/stb_image.h>
 #include <glad/glad.h>
+// #include <cglm/cglm.h>
 
 #define TEXTURE_PATH_SIZE 256
 #define TEXTURES_MAX 256
@@ -17,10 +18,17 @@ typedef struct Texture {
     unsigned char name[TEXTURE_PATH_SIZE];
 } Texture;
 
+typedef struct Skybox {
+    unsigned int VBO, VAO;
+    unsigned int cubemap;
+} Skybox;
+
 extern Texture textures[TEXTURES_MAX];
-extern int texture_count;
-extern unsigned int skybox;
+extern int textures_count;
+extern Skybox skybox;
 
 void loadTextures();
-unsigned int getCubemapTexture(const unsigned char** faces);
+void loadSkybox();
+void drawSkybox();
+unsigned int loadCubemap(const unsigned char** faces);
 Texture newTexture(unsigned char* image_name);

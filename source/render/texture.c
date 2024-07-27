@@ -4,24 +4,60 @@
 
 // Custom modules
 #include <texture.h>
+#include <shader.h>
+#include <camera.h>
 
 Texture textures[TEXTURES_MAX];
-int texture_count = 0;
-unsigned int skybox;
+int textures_count = 0;
+Skybox skybox;
+
+float skyboxVertices[] = {
+    // positions          
+    -1.0f,  1.0f, -1.0f,
+    -1.0f, -1.0f, -1.0f,
+     1.0f, -1.0f, -1.0f,
+     1.0f, -1.0f, -1.0f,
+     1.0f,  1.0f, -1.0f,
+    -1.0f,  1.0f, -1.0f,
+
+    -1.0f, -1.0f,  1.0f,
+    -1.0f, -1.0f, -1.0f,
+    -1.0f,  1.0f, -1.0f,
+    -1.0f,  1.0f, -1.0f,
+    -1.0f,  1.0f,  1.0f,
+    -1.0f, -1.0f,  1.0f,
+
+     1.0f, -1.0f, -1.0f,
+     1.0f, -1.0f,  1.0f,
+     1.0f,  1.0f,  1.0f,
+     1.0f,  1.0f,  1.0f,
+     1.0f,  1.0f, -1.0f,
+     1.0f, -1.0f, -1.0f,
+
+    -1.0f, -1.0f,  1.0f,
+    -1.0f,  1.0f,  1.0f,
+     1.0f,  1.0f,  1.0f,
+     1.0f,  1.0f,  1.0f,
+     1.0f, -1.0f,  1.0f,
+    -1.0f, -1.0f,  1.0f,
+
+    -1.0f,  1.0f, -1.0f,
+     1.0f,  1.0f, -1.0f,
+     1.0f,  1.0f,  1.0f,
+     1.0f,  1.0f,  1.0f,
+    -1.0f,  1.0f,  1.0f,
+    -1.0f,  1.0f, -1.0f,
+
+    -1.0f, -1.0f, -1.0f,
+    -1.0f, -1.0f,  1.0f,
+     1.0f, -1.0f, -1.0f,
+     1.0f, -1.0f, -1.0f,
+    -1.0f, -1.0f,  1.0f,
+     1.0f, -1.0f,  1.0f
+};
 
 // Load textures and sets up OpenGL
 void loadTextures() {
-    const unsigned char* faces[] = {
-        "right.jpg",
-        "left.jpg",
-        "top.jpg",
-        "bottom.jpg",
-        "front.jpg",
-        "back.jpg"
-    };
-    
-    skybox = getCubemapTexture(faces);
-
     struct dirent *dirEntry;
 
     DIR *dir = opendir("../resources/textures");
@@ -32,8 +68,8 @@ void loadTextures() {
 
     while ((dirEntry = readdir(dir)) != NULL)
         if (strstr(dirEntry->d_name, ".png") != NULL) {
-            textures[texture_count] = newTexture(dirEntry->d_name);
-            texture_count++;
+            textures[textures_count] = newTexture(dirEntry->d_name);
+            textures_count++;
         }
 
     closedir(dir);
@@ -75,7 +111,7 @@ Texture newTexture(unsigned char* image_name) {
 }
 
 // Returns a cubemap texture
-unsigned int getCubemapTexture(const unsigned char** faces) {
+unsigned int loadCubemap(const unsigned char** faces) {
     unsigned int cubemapID;
     glGenTextures(1, &cubemapID);
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapID);
@@ -99,4 +135,57 @@ unsigned int getCubemapTexture(const unsigned char** faces) {
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
     return cubemapID;
+}
+
+void loadSkybox() {
+    const unsigned char* faces[] = {
+        "../resources/textures/skybox/sky_right.jpg",
+        "../resources/textures/skybox/sky_left.jpg",
+        "../resources/textures/skybox/sky_top.jpg",
+        "../resources/textures/skybox/sky_bottom.jpg",
+        "../resources/textures/skybox/sky_front.jpg",
+        "../resources/textures/skybox/sky_back.jpg"
+    };
+
+    // Loading skybox cubemap 
+    skybox.cubemap = loadCubemap(faces);
+
+    // Setting VBO and VAO
+    glGenVertexArrays(1, &skybox.VAO);
+    glBindVertexArray(skybox.VAO);
+    glGenBuffers(1, &skybox.VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, skybox.VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), skyboxVertices, GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
+    glEnableVertexAttribArray(0);
+}
+
+// Renders skybox
+void drawSkybox() {
+    glDepthFunc(GL_LEQUAL);
+    
+    glUseProgram(skyboxShader);
+
+    setProjectionUniform(skyboxShader);
+    // Creating view matrix
+    mat4 view;
+    vec3 temp;
+    glm_vec3_add(camera.currPos, camera.front, temp);
+    glm_lookat(camera.currPos, temp, camera.up, view);
+    mat3 viewtemp;
+    glm_mat4_pick3(view, viewtemp);
+    glm_mat4_identity(view);
+    glm_mat4_ins3(viewtemp, view);
+
+    // Setting view uniform
+    int viewLoc = glGetUniformLocation(skyboxShader, "view");
+    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, view);
+
+    glBindVertexArray(skybox.VAO);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, skybox.cubemap);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+    
+    glBindVertexArray(0);
+    
+    glDepthFunc(GL_LESS);
 }

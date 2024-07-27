@@ -150,7 +150,7 @@ void killObject(Object* object) {
 }
 
 void setObjectTexture(Object* object, unsigned char* texture_name) {
-    for (int i = 0; i < texture_count; i++)
+    for (int i = 0; i < textures_count; i++)
         if (strcmp(textures[i].name, texture_name) == 0)
             object->texture = textures[i];        
 }

@@ -17,7 +17,7 @@ bool isRunning = true;
 int frames = 0;
 
 // Pauses (unpauses) the game and deattaches (attaches) the mouse cursor
-GLvoid togglePause() {
+void togglePause() {
     // Unpauses and returns cursor in the middle
     if (isPaused) {
         isPaused = false;
@@ -32,8 +32,8 @@ GLvoid togglePause() {
 } 
 
 // Main render function
-GLvoid render() {
-    glClearColor(0.529f, 0.808f, 0.922f, 1.0f);
+void render() {
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glUseProgram(mainShader);
@@ -42,7 +42,7 @@ GLvoid render() {
 
     // Apply linear interpolation to camera movement
     glm_vec3_lerp(camera.currPos, camera.targetPos, deltaTime * INTERPOLATION_MULTIPLIER, camera.currPos);
-    
+
     // Rendering every object
     for (int i = 0; i < active_objects; i++) {
         setModelUniform(objects[i]->model, mainShader);
@@ -50,6 +50,8 @@ GLvoid render() {
         glBindVertexArray(objects[i]->VAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
     }
+
+    drawSkybox();
 
     // Debug: recursively draw octree border lines
     if (dbgRenderOctree)

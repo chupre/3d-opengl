@@ -15,9 +15,9 @@
 🟢 Rename props to objects.\
 🟢 Add basic textures implementation.\
 🟢 Add texture preloading.\
-🔴 Add skybox.\
+🟢 Add skybox.\
 🟢 Remake shader function and make shader for octree render.\
-🔴 Add basic lightning.\
+🔴 Add basic lighting.\
 🔴 Add text rendering (FPS counter).\
 🔴 Add model loader.\
 🔴 Fix movement.\

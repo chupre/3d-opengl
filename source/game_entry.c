@@ -26,11 +26,14 @@ int main(int argc, char** argv) {
 
     // Sets up OpenGL and loads textures
     loadTextures();
+
+    // Sets up skybox
+    loadSkybox();
     
-    vec3 planeOffset = {500.0f, 0.0f, 500.0f};
+    vec3 planeOffset = {1000.0f, 0.0f, 1000.0f};
     vec3 planePos = { 0.0f, 0.0f, 0.0f };
     Object plane;
-    newObject(&plane, planePos, planeOffset, true, 80.0f);
+    newObject(&plane, planePos, planeOffset, true, 160.0f);
     setObjectTexture(&plane, "grass.png");
 
     vec3 test1Offset = {2.0f, 5.0f, 2.0f };

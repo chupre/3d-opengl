@@ -3,6 +3,7 @@
 
 unsigned int mainShader;
 unsigned int octreeShader;
+unsigned int skyboxShader;
 
 // Parse shader code in string
 char* getShaderContent(const GLchar* fileName) {
@@ -61,6 +62,7 @@ unsigned int genShader(char* vertexShaderName, char* fragmentShaderName) {
 }
 
 void loadShaders() {
-    mainShader = genShader("vMain", "fMain");
+    mainShader   = genShader("vMain"  , "fMain");
     octreeShader = genShader("vOctree", "fOctree");
+    skyboxShader = genShader("vSkybox", "fSkybox");
 }

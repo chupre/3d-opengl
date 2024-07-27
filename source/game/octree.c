@@ -214,6 +214,8 @@ void octreeDraw(OctreeNode *node) {
   };
 
   glUseProgram(octreeShader);
+  setViewUniform(octreeShader);
+  setProjectionUniform(octreeShader);
 
   // Setting VBO and VAO
   unsigned int nodeVAO, nodeVBO;
@@ -224,14 +226,6 @@ void octreeDraw(OctreeNode *node) {
   glBufferData(GL_ARRAY_BUFFER, sizeof(nodeVertices), nodeVertices, GL_STATIC_DRAW);
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
   glEnableVertexAttribArray(0);
-
-  // Setting identity model matrix
-  mat4 model;
-  glm_mat4_identity(model);
-
-  setViewUniform(octreeShader);
-  setModelUniform(model, octreeShader);
-  setProjectionUniform(octreeShader);
 
   // Render the node
   glBindVertexArray(nodeVAO);

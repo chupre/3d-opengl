@@ -32,11 +32,9 @@ GLvoid setWindow() {
     glEnable(GL_MULTISAMPLE);
 
     // Disable vsync
-    glfwSwapInterval(1);
+    glfwSwapInterval(0);
 
     //Setting icon for window
-    stbi_set_flip_vertically_on_load(1);
-
     GLint iconWidth, iconHeight;
     GLint channels;
     unsigned char* pixels = stbi_load("../resources/icons/window_icon.png", &iconWidth, &iconHeight, &channels, 4);
@@ -63,6 +61,7 @@ GLvoid setWindow() {
 GLvoid quit() {
     glDeleteProgram(mainShader);
     glDeleteProgram(octreeShader);
+    glDeleteProgram(skyboxShader);
     glfwTerminate();
     exit(EXIT_SUCCESS);
 }

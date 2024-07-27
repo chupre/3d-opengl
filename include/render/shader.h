@@ -10,6 +10,7 @@
 
 extern unsigned int mainShader;
 extern unsigned int octreeShader;
+extern unsigned int skyboxShader;
 
 void loadShaders();
 unsigned int genShader(char* vertexShaderName, char* fragmentShaderName);
