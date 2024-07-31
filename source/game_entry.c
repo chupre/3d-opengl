@@ -30,6 +30,7 @@ int main(int argc, char** argv) {
     // Sets up skybox
     loadSkybox();
     
+    // TEST OBJECTS
     vec3 planeOffset = {1000.0f, 0.0f, 1000.0f};
     vec3 planePos = { 0.0f, 0.0f, 0.0f };
     Object plane;
@@ -81,7 +82,7 @@ int main(int argc, char** argv) {
     setProjectionUniform(mainShader);
 
     // Main loop
-    while(isRunning) {
+    while(isRunning && !glfwWindowShouldClose(window)) {
         updateGameTime();
         processKeyboardInput();
 
