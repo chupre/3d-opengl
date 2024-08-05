@@ -1,4 +1,5 @@
 // Custom modules
+#include "cglm/vec3.h"
 #include <render.h>
 #include <window.h>
 #include <object.h>
@@ -42,6 +43,8 @@ void render() {
 
     // Apply linear interpolation to camera movement
     glm_vec3_lerp(camera.currPos, camera.targetPos, deltaTime * INTERPOLATION_MULTIPLIER, camera.currPos);
+	
+    //glm_vec3_copy(camera.targetPos, camera.currPos);
 
     // Rendering every object
     for (int i = 0; i < active_objects; i++) {
